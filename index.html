@@ -3,20 +3,584 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Valentine?</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>🦖💙 A Dino Love Story 🦕💚</title>
+    <style>
+        :root {
+            --color-bg-primary: #FFF0F5;
+            --color-text-primary: #2C3E50;
+            --color-accent: #FF69B4;
+            --color-green: #7CFC00;
+            --color-blue: #87CEEB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive;
+            background: linear-gradient(135deg, #FFE5EC 0%, #FFC9DE 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 95%;
+            padding: 20px;
+        }
+
+        .screen {
+            display: none;
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
+            animation: fadeIn 0.6s ease;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: var(--color-accent);
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .story-text {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: var(--color-text-primary);
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .dino-emoji {
+            font-size: 4em;
+            text-align: center;
+            margin: 20px 0;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .btn {
+            display: block;
+            margin: 30px auto;
+            padding: 15px 40px;
+            font-size: 1.3em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Puzzle Styles */
+        .puzzle-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 450px;
+            margin: 30px auto;
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 20px;
+        }
+
+        .puzzle-piece {
+            aspect-ratio: 1;
+            background: white;
+            border: 3px dashed #ccc;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+        }
+
+        .puzzle-piece:hover {
+            transform: scale(1.05);
+            border-color: var(--color-accent);
+        }
+
+        .puzzle-piece.filled {
+            border: 3px solid var(--color-green);
+            background: #e8f8e8;
+        }
+
+        .pieces-available {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .draggable-piece {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-green) 100%);
+            border-radius: 15px;
+            cursor: move;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+
+        .draggable-piece:hover {
+            transform: scale(1.1);
+        }
+
+        .draggable-piece.used {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        /* Valentine Question Screen */
+        .floating-dinos {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-dino {
+            position: absolute;
+            font-size: 3em;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, -30px) rotate(10deg); }
+            50% { transform: translate(100px, 20px) rotate(-10deg); }
+            75% { transform: translate(50px, 50px) rotate(5deg); }
+        }
+
+        .question-box {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .big-question {
+            font-size: 3em;
+            color: #FF1493;
+            margin: 30px 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .button-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        #yesBtn {
+            padding: 20px 60px;
+            font-size: 2em;
+            background: linear-gradient(135deg, #00FF00 0%, #32CD32 100%);
+            border: 3px solid #228B22;
+        }
+
+        #noBtn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            background: linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 100%);
+            color: #666;
+            border: 2px solid #FFB6C1;
+            position: relative;
+            transition: all 0.1s ease;
+        }
+
+        #noBtn:hover {
+            animation: runAway 0.5s ease;
+        }
+
+        @keyframes runAway {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(100px, -50px) rotate(15deg); }
+            50% { transform: translate(-100px, 50px) rotate(-15deg); }
+            75% { transform: translate(80px, -30px) rotate(10deg); }
+            100% { transform: translate(-120px, 40px) rotate(-20deg); }
+        }
+
+        /* Final Screen */
+        .celebration {
+            text-align: center;
+        }
+
+        .hearts-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2em;
+            animation: fall 4s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            0% { top: -10%; opacity: 1; }
+            100% { top: 110%; opacity: 0; }
+        }
+
+        .flower-bouquet {
+            font-size: 5em;
+            margin: 30px 0;
+            animation: bouquetAppear 1s ease;
+        }
+
+        @keyframes bouquetAppear {
+            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .love-message {
+            font-size: 1.5em;
+            color: #FF1493;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8em; }
+            .story-text { font-size: 1em; }
+            .btn { font-size: 1.1em; padding: 12px 30px; }
+            .puzzle-container { max-width: 300px; }
+            .big-question { font-size: 2em; }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Will you be my Valentine?</h1>
-        <div class="buttons">
-            <button class="yes-button" onclick="handleYesClick()">Yes</button>
-            <button class="no-button" onclick="handleNoClick()">No</button>
+        <!-- Story Introduction -->
+        <div class="screen active" id="screen1">
+            <h1>🦖 A Dino Love Story 💙</h1>
+            <div class="dino-emoji">🦖💚</div>
+            <div class="story-text">
+                Once upon a time in the prehistoric land of Dinovia, there lived a brave green T-Rex named Rex...
+                <br><br>
+                He had the strongest roar, the mightiest tail, but his heart was soft and gentle.
+            </div>
+            <button class="btn" onclick="nextScreen(2)">Continue →</button>
         </div>
-        <div class="gif_container">
-            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW5lenZyZHI5OXM2eW95b3pmMG40cWVrMDhtNjVuM3A4dGNxa2g2dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/VM1fcpu2bKs1e2Kdbj/giphy.gif" alt="Cute GIF">
+
+        <!-- Story Part 2 -->
+        <div class="screen" id="screen2">
+            <h1>🦕 The Blue Beauty 💙</h1>
+            <div class="dino-emoji">🦕💙</div>
+            <div class="story-text">
+                One day, Rex saw the most beautiful sauropod with a long graceful neck and a cute pink bow on her ear...
+                <br><br>
+                Her name was Sadie, and she had the kindest eyes and the sweetest smile.
+                <br><br>
+                Rex's heart skipped a beat! 💓
+            </div>
+            <button class="btn" onclick="nextScreen(3)">Continue →</button>
+        </div>
+
+        <!-- Story Part 3 -->
+        <div class="screen" id="screen3">
+            <h1>😊 Too Shy to Say Hi 😳</h1>
+            <div class="dino-emoji">🦖💭🦕</div>
+            <div class="story-text">
+                Every day, Rex would see Sadie near the fern forest...
+                <br><br>
+                He wanted to talk to her SO badly, but whenever he got close, his words got stuck in his throat!
+                <br><br>
+                Sadie noticed the handsome green T-Rex too, but she was too shy to say anything... 🥺
+            </div>
+            <button class="btn" onclick="nextScreen(4)">Continue →</button>
+        </div>
+
+        <!-- Story Part 4 -->
+        <div class="screen" id="screen4">
+            <h1>💡 A Special Plan 💝</h1>
+            <div class="dino-emoji">🦖✨</div>
+            <div class="story-text">
+                With Valentine's Day approaching, Rex decided he MUST tell Sadie how he feels!
+                <br><br>
+                He created a special puzzle just for her... a picture of them together! 
+                <br><br>
+                But he needs YOUR help to complete it! 🎯
+            </div>
+            <button class="btn" onclick="nextScreen(5)">Help Rex! 💪</button>
+        </div>
+
+        <!-- Puzzle Game -->
+        <div class="screen" id="screen5">
+            <h1>🧩 Complete the Heart Puzzle!</h1>
+            <div class="story-text" style="font-size: 1em;">
+                Drag the heart pieces into the empty spaces to reveal Rex and Sadie's special moment! 💕
+            </div>
+            
+            <div class="puzzle-container" id="puzzleGrid">
+                <div class="puzzle-piece" data-index="0"></div>
+                <div class="puzzle-piece" data-index="1"></div>
+                <div class="puzzle-piece" data-index="2"></div>
+                <div class="puzzle-piece" data-index="3"></div>
+                <div class="puzzle-piece" data-index="4"></div>
+                <div class="puzzle-piece" data-index="5"></div>
+                <div class="puzzle-piece" data-index="6"></div>
+                <div class="puzzle-piece" data-index="7"></div>
+                <div class="puzzle-piece" data-index="8"></div>
+            </div>
+
+            <div class="pieces-available" id="piecesContainer">
+                <div class="draggable-piece" draggable="true" data-piece="0">💚</div>
+                <div class="draggable-piece" draggable="true" data-piece="1">💙</div>
+                <div class="draggable-piece" draggable="true" data-piece="2">💕</div>
+                <div class="draggable-piece" draggable="true" data-piece="3">🦖</div>
+                <div class="draggable-piece" draggable="true" data-piece="4">❤️</div>
+                <div class="draggable-piece" draggable="true" data-piece="5">🦕</div>
+                <div class="draggable-piece" draggable="true" data-piece="6">💝</div>
+                <div class="draggable-piece" draggable="true" data-piece="7">🎀</div>
+                <div class="draggable-piece" draggable="true" data-piece="8">✨</div>
+            </div>
+        </div>
+
+        <!-- The Big Question -->
+        <div class="screen" id="screen6">
+            <div class="floating-dinos" id="floatingDinos"></div>
+            <div class="question-box">
+                <h1>💝 The Moment of Truth 💝</h1>
+                <div class="dino-emoji">🦖💚💙🦕</div>
+                <div class="story-text">
+                    With trembling tiny arms and a racing heart, Rex finally found his courage...
+                </div>
+                <div class="big-question">
+                    Will you be my Valentine? 💕
+                </div>
+                <div class="button-container">
+                    <button class="btn" id="yesBtn" onclick="sayYes()">YES! 💚</button>
+                    <button class="btn" id="noBtn" onmouseover="moveNoButton(event)">No...</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Celebration -->
+        <div class="screen" id="screen7">
+            <div class="hearts-rain" id="heartsRain"></div>
+            <div class="celebration">
+                <h1>🎉 SHE SAID YES! 🎉</h1>
+                <div class="flower-bouquet">💐🌹🌷🌺🌸💐</div>
+                <div class="dino-emoji">🦖❤️🦕</div>
+                <div class="love-message">
+                    Rex's heart exploded with joy! 
+                    <br><br>
+                    He gave Sadie the most beautiful bouquet of prehistoric flowers...
+                    <br><br>
+                    They danced under the stars, finally together! 
+                    <br><br>
+                    💚 From that day on, they were inseparable... 💙
+                    <br><br>
+                    🦖💕🦕
+                    <br><br>
+                    <strong>THE END</strong>
+                    <br>
+                    <em>(or should we say... THE BEGINNING! 💝)</em>
+                </div>
+                <div class="flower-bouquet">🌟✨💖✨🌟</div>
+                <button class="btn" onclick="location.reload()">Play Again 🔄</button>
+            </div>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        let currentScreen = 1;
+        let puzzleCompleted = false;
+        let filledPieces = 0;
+
+        function nextScreen(screenNum) {
+            document.getElementById(`screen${currentScreen}`).classList.remove('active');
+            currentScreen = screenNum;
+            document.getElementById(`screen${screenNum}`).classList.add('active');
+
+            if (screenNum === 5) {
+                initPuzzle();
+            } else if (screenNum === 6) {
+                createFloatingDinos();
+            }
+        }
+
+        // Puzzle Game Logic
+        function initPuzzle() {
+            const pieces = document.querySelectorAll('.draggable-piece');
+            const slots = document.querySelectorAll('.puzzle-piece');
+
+            pieces.forEach(piece => {
+                piece.addEventListener('dragstart', dragStart);
+                piece.addEventListener('dragend', dragEnd);
+            });
+
+            slots.forEach(slot => {
+                slot.addEventListener('dragover', dragOver);
+                slot.addEventListener('drop', drop);
+            });
+        }
+
+        let draggedElement = null;
+
+        function dragStart(e) {
+            draggedElement = e.target;
+            e.target.style.opacity = '0.5';
+        }
+
+        function dragEnd(e) {
+            e.target.style.opacity = '1';
+        }
+
+        function dragOver(e) {
+            e.preventDefault();
+        }
+
+        function drop(e) {
+            e.preventDefault();
+            const slot = e.currentTarget;
+            
+            if (!slot.classList.contains('filled') && draggedElement) {
+                slot.textContent = draggedElement.textContent;
+                slot.classList.add('filled');
+                draggedElement.classList.add('used');
+                filledPieces++;
+
+                if (filledPieces === 9) {
+                    setTimeout(() => {
+                        puzzleCompleted = true;
+                        celebratePuzzle();
+                    }, 500);
+                }
+            }
+        }
+
+        function celebratePuzzle() {
+            alert('🎉 Puzzle Complete! The picture is beautiful! 💕');
+            setTimeout(() => {
+                nextScreen(6);
+            }, 1000);
+        }
+
+        // Floating Dinos Background
+        function createFloatingDinos() {
+            const container = document.getElementById('floatingDinos');
+            const dinos = ['🦖', '🦕', '💚', '💙', '💕', '❤️', '💝', '🎀', '✨', '🌟'];
+            
+            for (let i = 0; i < 20; i++) {
+                const dino = document.createElement('div');
+                dino.className = 'floating-dino';
+                dino.textContent = dinos[Math.floor(Math.random() * dinos.length)];
+                dino.style.left = Math.random() * 100 + '%';
+                dino.style.top = Math.random() * 100 + '%';
+                dino.style.animationDelay = Math.random() * 5 + 's';
+                dino.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                container.appendChild(dino);
+            }
+        }
+
+        // No Button Movement
+        function moveNoButton(event) {
+            const btn = event.target;
+            const container = btn.parentElement;
+            const containerRect = container.getBoundingClientRect();
+            
+            const maxX = window.innerWidth - btn.offsetWidth - 100;
+            const maxY = window.innerHeight - btn.offsetHeight - 100;
+            
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            btn.style.position = 'fixed';
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+            
+            // Make it smaller and smaller
+            const currentSize = parseFloat(window.getComputedStyle(btn).fontSize);
+            if (currentSize > 8) {
+                btn.style.fontSize = (currentSize * 0.9) + 'px';
+            }
+        }
+
+        // Say Yes!
+        function sayYes() {
+            nextScreen(7);
+            createHeartsRain();
+            playVictoryAnimation();
+        }
+
+        function createHeartsRain() {
+            const container = document.getElementById('heartsRain');
+            const hearts = ['💕', '❤️', '💖', '💗', '💓', '💝', '💘'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                    heart.style.animationDelay = Math.random() * 2 + 's';
+                    container.appendChild(heart);
+                }, i * 100);
+            }
+        }
+
+        function playVictoryAnimation() {
+            // Play celebration sounds if available
+            console.log('🎉 CELEBRATION! 🎉');
+        }
+    </script>
 </body>
 </html>
