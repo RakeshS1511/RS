@@ -267,4 +267,363 @@
       border-right-color:#60a5fa;border-top-color:#60a5fa;
       transform-origin:left bottom;
       animation:dino-tail 1.5s ease-in-out infinite;
-      filter:drop-shadow(-6px -6px 8px rgba(0
+      filter:drop-shadow(-6px -6px 8px rgba(0,0,0,.2));
+    }
+    .dino-leg{
+      position:absolute;bottom:0;width:28px;height:36px;
+      background:linear-gradient(135deg,#3b82f6,#2563eb);
+      border-radius:14px;
+      box-shadow:inset -4px -4px 8px rgba(0,0,0,.3),0 6px 0 #1e3a8a;
+    }
+    .l1{left:72px;animation:dino-step .9s ease-in-out infinite alternate}
+    .l2{left:124px;animation:dino-step .9s ease-in-out infinite alternate-reverse}
+    .dino-bow{
+      position:absolute;top:-8px;right:2px;width:42px;height:28px;
+    }
+    .bow-knot{
+      position:absolute;top:9px;left:16px;width:14px;height:14px;
+      background:radial-gradient(circle,#fb7185,#f43f5e);
+      border-radius:50%;
+      box-shadow:0 0 8px rgba(251,113,133,.8),inset -2px -2px 4px rgba(0,0,0,.2);
+    }
+    .bow-left,.bow-right{
+      position:absolute;top:5px;width:18px;height:16px;
+      background:linear-gradient(135deg,#fda4af,#fb7185);
+      border-radius:50% 12% 50% 12%;
+      box-shadow:inset -2px -2px 4px rgba(0,0,0,.2);
+    }
+    .bow-left{left:0;transform:rotate(-22deg)}
+    .bow-right{right:0;transform:rotate(22deg)}
+    @keyframes dino-tail{0%{transform:rotate(0)}50%{transform:rotate(14deg)}100%{transform:rotate(-7deg)}}
+    @keyframes dino-step{0%{transform:translateY(0)}100%{transform:translateY(4px)}}
+
+    /* GLASS-MORPHIC CARD - SMALL, TOP CENTER */
+    .card{
+      position:absolute;top:12%;left:50%;transform:translateX(-50%);
+      min-width:300px;max-width:380px;
+      background:rgba(15,23,42,.85);
+      backdrop-filter:blur(24px);
+      border-radius:24px;
+      padding:1.1rem 1.4rem 1rem;
+      text-align:center;
+      color:#f9fafb;
+      box-shadow:0 20px 50px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.15);
+      border:1px solid rgba(255,255,255,.2);
+      z-index:6;
+    }
+    .card-pill{
+      display:inline-flex;align-items:center;gap:.4rem;
+      padding:.25rem .85rem;font-size:.7rem;text-transform:uppercase;letter-spacing:.2em;
+      border-radius:999px;border:1px solid rgba(255,255,255,.3);
+      color:#cbd5e1;margin-bottom:.5rem;
+      background:rgba(255,255,255,.08);
+    }
+    .heart-dot{
+      width:9px;height:9px;border-radius:50%;
+      background:#fb7185;
+      box-shadow:0 0 12px rgba(251,113,133,.9);
+    }
+    .card h1{font-size:1.3rem;margin-bottom:.4rem;font-weight:700}
+    .card small{font-size:.8rem;color:#cbd5e1;opacity:.95}
+
+    .buttons{
+      margin-top:.8rem;display:flex;justify-content:center;gap:.8rem;
+      position:relative;min-height:40px;
+    }
+    .btn{
+      padding:.5rem 1.2rem;border-radius:999px;border:none;
+      cursor:pointer;font-size:.88rem;min-width:100px;font-weight:600;
+      transition:transform .15s ease,box-shadow .15s ease;
+    }
+    .btn-yes{
+      background:linear-gradient(135deg,#22c55e,#16a34a);
+      color:#022c22;
+      box-shadow:0 12px 32px rgba(34,197,94,.6);
+      position:relative;z-index:2;
+    }
+    .btn-yes:hover{
+      transform:translateY(-2px) scale(1.05);
+      box-shadow:0 16px 40px rgba(34,197,94,.75);
+    }
+    .btn-no{
+      background:linear-gradient(135deg,#6366f1,#4f46e5);
+      color:#f9fafb;
+      box-shadow:0 10px 28px rgba(99,102,241,.5);
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+    }
+
+    .answer-text{margin-top:.5rem;font-size:.8rem;color:#a5b4fc;min-height:1rem}
+
+    /* CELEBRATION - MINIMAL TEXT, BIG VISUAL */
+    .celebration{
+      position:fixed;inset:0;
+      background:radial-gradient(circle at top,#34d399,#10b981);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      color:#022c22;text-align:center;z-index:20;
+      opacity:0;pointer-events:none;
+      transform:scale(1.05);
+      transition:opacity .4s ease,transform .4s ease;
+    }
+    .celebration.active{opacity:1;pointer-events:auto;transform:scale(1)}
+    .cele-title{
+      font-size:clamp(2.8rem,8vw,4rem);font-weight:900;margin-bottom:.5rem;
+      text-shadow:2px 2px 6px rgba(0,0,0,.3);
+    }
+    .cele-sub{font-size:1rem;margin-bottom:1.2rem;opacity:.95}
+    .cele-dino{
+      position:relative;width:260px;height:180px;margin-bottom:1rem;
+    }
+    .cele-btn{
+      padding:.5rem 1.3rem;border-radius:999px;border:none;
+      font-size:.88rem;cursor:pointer;font-weight:600;
+      background:#facc15;color:#422006;
+      box-shadow:0 12px 32px rgba(234,179,8,.8);
+    }
+
+    .confetti-dot{
+      position:absolute;border-radius:50%;opacity:.9;
+      animation:confetti-fall 5s linear infinite;
+    }
+    @keyframes confetti-fall{
+      0%{transform:translateY(-10vh) rotate(0deg)}
+      100%{transform:translateY(110vh) rotate(360deg)}
+    }
+
+  </style>
+</head>
+<body>
+  <div class="scene">
+    <div class="sky"></div>
+    <div class="sun"></div>
+
+    <div class="cloud c1"></div>
+    <div class="cloud c2"></div>
+    <div class="cloud c3"></div>
+    <div class="cloud c4"></div>
+
+    <div class="hill h1"></div>
+    <div class="hill h2"></div>
+
+    <div class="tree t1"><div class="tree-crown"></div><div class="tree-trunk"></div></div>
+    <div class="tree t2"><div class="tree-crown"></div><div class="tree-trunk"></div></div>
+    <div class="tree t3"><div class="tree-crown"></div><div class="tree-trunk"></div></div>
+    <div class="tree t4"><div class="tree-crown"></div><div class="tree-trunk"></div></div>
+    <div class="tree t5"><div class="tree-crown"></div><div class="tree-trunk"></div></div>
+    <div class="tree t6"><div class="tree-crown"></div><div class="tree-trunk"></div></div>
+
+    <div class="flower f1">
+      <div class="flower-petals">
+        <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+        <div class="flower-center"></div>
+      </div>
+      <div class="flower-stem"></div>
+    </div>
+    <div class="flower f2">
+      <div class="flower-petals">
+        <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+        <div class="flower-center"></div>
+      </div>
+      <div class="flower-stem"></div>
+    </div>
+    <div class="flower f3">
+      <div class="flower-petals">
+        <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+        <div class="flower-center"></div>
+      </div>
+      <div class="flower-stem"></div>
+    </div>
+    <div class="flower f4">
+      <div class="flower-petals">
+        <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+        <div class="flower-center"></div>
+      </div>
+      <div class="flower-stem"></div>
+    </div>
+    <div class="flower f5">
+      <div class="flower-petals">
+        <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+        <div class="flower-center"></div>
+      </div>
+      <div class="flower-stem"></div>
+    </div>
+    <div class="flower f6">
+      <div class="flower-petals">
+        <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+        <div class="flower-center"></div>
+      </div>
+      <div class="flower-stem"></div>
+    </div>
+
+    <div class="bird b1">
+      <div class="bird-body"></div><div class="bird-wing"></div><div class="bird-beak"></div>
+    </div>
+    <div class="bird b2">
+      <div class="bird-body"></div><div class="bird-wing"></div><div class="bird-beak"></div>
+    </div>
+    <div class="bird b3">
+      <div class="bird-body"></div><div class="bird-wing"></div><div class="bird-beak"></div>
+    </div>
+    <div class="bird b4">
+      <div class="bird-body"></div><div class="bird-wing"></div><div class="bird-beak"></div>
+    </div>
+
+    <div class="swan sw1">
+      <div class="swan-body"></div><div class="swan-neck"></div>
+      <div class="swan-head"><div class="swan-beak"></div></div>
+    </div>
+    <div class="swan sw2">
+      <div class="swan-body"></div><div class="swan-neck"></div>
+      <div class="swan-head"><div class="swan-beak"></div></div>
+    </div>
+
+    <div class="butterfly bf1">
+      <div class="butterfly-wing left"></div>
+      <div class="butterfly-wing right"></div>
+      <div class="butterfly-body"></div>
+    </div>
+    <div class="butterfly bf2">
+      <div class="butterfly-wing left"></div>
+      <div class="butterfly-wing right"></div>
+      <div class="butterfly-body"></div>
+    </div>
+    <div class="butterfly bf3">
+      <div class="butterfly-wing left"></div>
+      <div class="butterfly-wing right"></div>
+      <div class="butterfly-body"></div>
+    </div>
+
+    <!-- BIG REALISTIC BLUE DINO CENTER -->
+    <div class="dino">
+      <div class="dino-body"></div>
+      <div class="dino-neck"></div>
+      <div class="dino-head">
+        <div class="dino-eye"></div>
+        <div class="dino-smile"></div>
+        <div class="dino-bow">
+          <div class="bow-knot"></div>
+          <div class="bow-left"></div>
+          <div class="bow-right"></div>
+        </div>
+      </div>
+      <div class="dino-tail"></div>
+      <div class="dino-leg l1"></div>
+      <div class="dino-leg l2"></div>
+    </div>
+
+    <!-- SMALL GLASS CARD TOP CENTER -->
+    <div class="card">
+      <div class="card-pill">
+        <span class="heart-dot"></span>
+        <span>for simeeee</span>
+      </div>
+      <h1>Be my Valentine?</h1>
+      <small>(the blue dino really hopes you say yes)</small>
+
+      <div class="buttons">
+        <button class="btn btn-yes" id="yesBtn">Yes 💙</button>
+        <button class="btn btn-no" id="noBtn">No</button>
+      </div>
+      <div class="answer-text" id="answer"></div>
+    </div>
+  </div>
+
+  <!-- CELEBRATION -->
+  <div class="celebration" id="celebration">
+    <div class="cele-title">YAY 💙</div>
+    <div class="cele-sub">Simeeee said yes.</div>
+
+    <div class="cele-dino">
+      <div class="dino-body" style="left:45px"></div>
+      <div class="dino-neck" style="left:73px"></div>
+      <div class="dino-head" style="left:47px">
+        <div class="dino-eye"></div>
+        <div class="dino-smile"></div>
+        <div class="dino-bow">
+          <div class="bow-knot"></div>
+          <div class="bow-left"></div>
+          <div class="bow-right"></div>
+        </div>
+      </div>
+      <div class="dino-tail"></div>
+      <div class="dino-leg l1" style="left:67px"></div>
+      <div class="dino-leg l2" style="left:119px"></div>
+    </div>
+
+    <button class="cele-btn" onclick="hideCelebration()">back to the forest</button>
+  </div>
+
+  <script>
+    const noBtn=document.getElementById("noBtn"),yesBtn=document.getElementById("yesBtn"),
+          answer=document.getElementById("answer"),celebration=document.getElementById("celebration");
+
+    let noBtnX=0,noBtnY=0;
+
+    function initNoBtn(){
+      const rect=noBtn.getBoundingClientRect();
+      noBtnX=rect.left;noBtnY=rect.top;
+    }
+    initNoBtn();
+
+    document.addEventListener("mousemove",e=>{
+      const rect=noBtn.getBoundingClientRect();
+      const centerX=rect.left+rect.width/2,centerY=rect.top+rect.height/2;
+      const dx=e.clientX-centerX,dy=e.clientY-centerY;
+      const dist=Math.hypot(dx,dy);
+
+      if(dist<150){
+        const angle=Math.atan2(dy,dx)+Math.PI;
+        const jump=180;
+        let newX=centerX+Math.cos(angle)*jump;
+        let newY=centerY+Math.sin(angle)*jump;
+
+        const cardRect=document.querySelector(".card").getBoundingClientRect();
+        const maxX=cardRect.width-rect.width-10;
+        const maxY=cardRect.height-rect.height-10;
+
+        newX=Math.max(10,Math.min(maxX,newX-cardRect.left));
+        newY=Math.max(10,Math.min(maxY,newY-cardRect.top));
+
+        noBtn.style.position="absolute";
+        noBtn.style.left=newX+"px";
+        noBtn.style.top=newY+"px";
+      }
+    });
+
+    yesBtn.addEventListener("click",()=>{
+      answer.textContent="";
+      showCelebration();
+    });
+
+    noBtn.addEventListener("click",e=>{
+      e.preventDefault();
+      e.stopPropagation();
+    });
+
+    function showCelebration(){
+      celebration.classList.add("active");
+      spawnConfetti();
+    }
+    function hideCelebration(){
+      celebration.classList.remove("active");
+    }
+
+    function spawnConfetti(){
+      const colors=["#22c55e","#0ea5e9","#f97316","#ec4899","#eab308","#a855f7"];
+      for(let i=0;i<50;i++){
+        const dot=document.createElement("div");
+        dot.className="confetti-dot";
+        const size=Math.random()*12+6;
+        dot.style.width=size+"px";dot.style.height=size+"px";
+        dot.style.left=Math.random()*100+"vw";
+        dot.style.top=(Math.random()*40-20)+"vh";
+        dot.style.background=colors[Math.floor(Math.random()*colors.length)];
+        dot.style.animationDuration=(4+Math.random()*3)+"s";
+        celebration.appendChild(dot);
+        setTimeout(()=>dot.remove(),7000);
+      }
+    }
+  </script>
+</body>
+</html>
