@@ -249,6 +249,14 @@
             50% { transform: scale(1.1); }
         }
 
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            10% { transform: scale(1.1); }
+            20% { transform: scale(1); }
+            30% { transform: scale(1.1); }
+            40% { transform: scale(1); }
+        }
+
         .button-container {
             display: flex;
             gap: 30px;
@@ -394,16 +402,18 @@
         </div>
 
         <!-- Screen 4: Puzzle Challenge -->
-        <div class="screen" id="screen4">
-            <h1>🧩 Help Rocky! 🧩</h1>
-            <div class="story-text" style="font-size: 1.1em;">
-                Rocky made a special puzzle for Simeee! 💝
-                <br><br>
-                But it's all mixed up... Can you help him solve it? 🤔
-                <br><br>
-                <strong>Click two pieces to swap them!</strong>
+        <div class="screen" id="screen4" style="background-image: url('https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/113ceb80-541a-4ed4-8773-6265fd5c5d93'); background-size: cover; background-position: center;">
+            <div class="content-overlay">
+                <h1>🧩 Help Rocky! 🧩</h1>
+                <div class="story-text" style="font-size: 1.1em;">
+                    Rocky made a special puzzle for Simeee! 💝
+                    <br><br>
+                    But it's all mixed up... Can you help him solve it? 🤔
+                    <br><br>
+                    <strong>Click two pieces to swap them!</strong>
+                </div>
+                <button class="btn" onclick="nextScreen(5)">Start Puzzle! 🎯</button>
             </div>
-            <button class="btn" onclick="nextScreen(5)">Start Puzzle! 🎯</button>
         </div>
 
         <!-- Puzzle Game -->
@@ -427,7 +437,7 @@
             <div class="question-box">
                 <h1>💝 The Big Question 💝</h1>
                 <div style="width: 100%; max-width: 500px; margin: 20px auto; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/7e4fb994-3c88-4f78-be82-5c2de7e910dc" alt="Rocky and Simeee together" style="width: 100%; height: auto; display: block; animation: pulse 2s infinite;">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/6b40aa2e-5b78-4e2e-ab67-82ac1603cad7" alt="Rocky and Simeee heart puzzle" style="width: 100%; height: auto; display: block; animation: heartbeat 1.5s infinite;">
                 </div>
                 <div class="story-text">
                     Rocky really enjoys spending time with Simeee 🌟
