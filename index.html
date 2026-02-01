@@ -42,10 +42,35 @@
         .screen {
             display: none;
             background: white;
-            border-radius: 30px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
+            border-radius: 0;
+            padding: 0;
+            box-shadow: none;
             animation: fadeIn 0.6s ease;
+            min-height: 100vh;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .content-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+            padding: 40px;
+            text-align: center;
+        }
+
+        .content-overlay h1 {
+            color: white;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.8);
+        }
+
+        .content-overlay .story-text {
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
         }
 
         .screen.active {
@@ -134,7 +159,7 @@
             position: relative;
             overflow: hidden;
             background-size: 300% 300%;
-            background-image: url('https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/ba820b62-7460-4ab8-9861-757e757655ec');
+            background-image: url('https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/6b40aa2e-5b78-4e2e-ab67-82ac1603cad7');
             border-radius: 10px;
         }
 
@@ -323,52 +348,49 @@
 </head>
 <body>
     <div class="container">
-        <!-- Screen 1: Rocky loves the lake -->
-        <div class="screen active" id="screen1">
-            <h1>💚 Rocky's Favorite Place 💚</h1>
-            <div style="width: 100%; height: 50vh; min-height: 350px; margin: 20px auto; display: flex; justify-content: center; background: linear-gradient(135deg, rgba(124, 252, 0, 0.2) 0%, rgba(34, 139, 34, 0.3) 100%); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/e67b3959-ba95-4707-bd03-878ca1b4f7a4" alt="Rocky at the lake" style="width: 100%; height: 100%; object-fit: cover;">
+        <!-- Screen 1: Rocky fishing -->
+        <div class="screen active" id="screen1" style="background-image: url('https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/72a1bd7d-8a93-457a-b3a6-cd0f20a66ceb'); background-size: cover; background-position: center;">
+            <div class="content-overlay">
+                <h1>💚 Rocky's Favorite Place 💚</h1>
+                <div class="story-text">
+                    This is Rocky! He's a friendly green T-Rex 🦖
+                    <br><br>
+                    He loves fishing at the lake and watching the water 🎣💧
+                    <br><br>
+                    One day, he saw an angel by the lake... 💭✨
+                </div>
+                <button class="btn" onclick="nextScreen(2)">Next →</button>
             </div>
-            <div class="story-text">
-                This is Rocky! He's a friendly green T-Rex 🦖
-                <br><br>
-                He loves fishing at the lake and watching the water 🎣💧
-                <br><br>
-                One day, he saw an angel by the lake... 💭✨
-            </div>
-            <button class="btn" onclick="nextScreen(2)">Next →</button>
         </div>
 
         <!-- Screen 2: Meet Simeee -->
-        <div class="screen" id="screen2">
-            <h1>💙 Meet Simeee 💙</h1>
-            <div style="width: 100%; height: 50vh; min-height: 350px; margin: 20px auto; display: flex; justify-content: center; background: linear-gradient(135deg, rgba(135, 206, 235, 0.2) 0%, rgba(255, 192, 203, 0.3) 100%); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/58f1a154-b3db-4602-90a0-c3f1b48f390c" alt="Rocky sees Simeee" style="width: 100%; height: 100%; object-fit: cover;">
+        <div class="screen" id="screen2" style="background-image: url('https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/0e25e1ee-5e23-4084-b371-179c06c3eded'); background-size: cover; background-position: center;">
+            <div class="content-overlay">
+                <h1>💙 Meet Simeee 💙</h1>
+                <div class="story-text">
+                    There she was! Simeee, reading a book by the lake 📚💙
+                    <br><br>
+                    She looked like an angel in the soft sunlight ✨
+                    <br><br>
+                    Rocky's heart skipped a beat... She's absolutely amazing! 💚💭
+                </div>
+                <button class="btn" onclick="nextScreen(3)">Next →</button>
             </div>
-            <div class="story-text">
-                There she was! Simeee, reading a book by the lake 📚💙
-                <br><br>
-                She looked like an angel in the soft sunlight ✨
-                <br><br>
-                Rocky's heart skipped a beat... She's absolutely amazing! 💚💭
-            </div>
-            <button class="btn" onclick="nextScreen(3)">Next →</button>
         </div>
 
         <!-- Screen 3: Rocky Thinking -->
-        <div class="screen" id="screen3">
-            <h1>💭 Rocky's Thoughts 💭</h1>
-            <div style="width: 100%; height: 50vh; min-height: 350px; margin: 20px auto; display: flex; justify-content: center; background: linear-gradient(135deg, rgba(255, 105, 180, 0.2) 0%, rgba(255, 182, 193, 0.3) 100%); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/5b9d36a0-8701-4b58-aec7-c585bf593f10" alt="Rocky thinking about Simeee" style="width: 100%; height: 100%; object-fit: cover;">
+        <div class="screen" id="screen3" style="background-image: url('https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/e6584970-d28b-49e8-8dd5-f38223ae2404'); background-size: cover; background-position: center;">
+            <div class="content-overlay">
+                <h1>💭 Rocky's Thoughts 💭</h1>
+                <div class="story-text">
+                    Rocky can't stop thinking about Simeee 💚
+                    <br><br>
+                    He sees her reflection in the water and dreams about her 🌟
+                    <br><br>
+                    Valentine's Day is coming... Should he tell Simeee how he feels? 💝
+                </div>
+                <button class="btn" onclick="nextScreen(4)">Next →</button>
             </div>
-            <div class="story-text">
-                Rocky can't stop thinking about Simeee 💚
-                <br><br>
-                They spend time together exploring the forest 🌿
-                <br><br>
-                Valentine's Day is coming... Should he tell Simeee how he feels? 💝
-            </div>
-            <button class="btn" onclick="nextScreen(4)">Next →</button>
         </div>
 
         <!-- Screen 4: Puzzle Challenge -->
@@ -404,8 +426,8 @@
             <div class="floating-dinos" id="floatingDinos"></div>
             <div class="question-box">
                 <h1>💝 The Big Question 💝</h1>
-                <div style="width: 100%; height: 50vh; min-height: 350px; margin: 20px auto; display: flex; justify-content: center; background: linear-gradient(135deg, rgba(255, 105, 180, 0.2) 0%, rgba(255, 20, 147, 0.3) 100%); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/ba820b62-7460-4ab8-9861-757e757655ec" alt="Rocky and Simeee together" style="width: 100%; height: 100%; object-fit: cover; animation: pulse 2s infinite;">
+                <div style="width: 100%; max-width: 500px; margin: 20px auto; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/7e4fb994-3c88-4f78-be82-5c2de7e910dc" alt="Rocky and Simeee together" style="width: 100%; height: auto; display: block; animation: pulse 2s infinite;">
                 </div>
                 <div class="story-text">
                     Rocky really enjoys spending time with Simeee 🌟
@@ -430,8 +452,8 @@
             <div class="celebration">
                 <h1>🎉 She Said YES! 🎉</h1>
                 <div class="flower-bouquet">💐🌹🌷🌺🌸💐</div>
-                <div style="width: 100%; height: 50vh; min-height: 350px; margin: 20px auto; display: flex; justify-content: center; background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 105, 180, 0.3) 100%); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/4f3d186b-5516-4998-828f-c0210d26d1ef" alt="Rocky and Simeee celebrating" style="width: 100%; height: 100%; object-fit: cover; animation: bouquetAppear 1s ease;">
+                <div style="width: 100%; max-width: 500px; margin: 20px auto; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/7e4fb994-3c88-4f78-be82-5c2de7e910dc" alt="Rocky and Simeee celebrating" style="width: 100%; height: auto; display: block; animation: bouquetAppear 1s ease;">
                 </div>
                 <div class="love-message">
                     Rocky is so happy! 😊
