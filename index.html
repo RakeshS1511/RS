@@ -2,387 +2,548 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Simeeee 💙</title>
+<title>Simeeee's Valentine 💙</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
   overflow:hidden;
-  font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
-  background:#000;
-  cursor:none;
+  font-family:'Comic Sans MS','Trebuchet MS',sans-serif;
+  background:#87ceeb;
+  position:relative;
 }
 
-/* CUSTOM CURSOR */
-.cursor{
-  position:fixed;
-  width:20px;height:20px;
-  border:2px solid rgba(255,255,255,.8);
-  border-radius:50%;
-  pointer-events:none;
-  transition:transform .1s ease;
-  z-index:9999;
-  mix-blend-mode:difference;
-}
-.cursor.hover{transform:scale(2)}
-
-/* PARALLAX LAYERS */
-.layer{
+/* RICK & MORTY STYLE BACKGROUND */
+.scene{
   position:absolute;
   inset:0;
-  background-size:cover;
-  background-position:center;
+  background:
+    linear-gradient(180deg, #5ec1f7 0%, #87ceeb 40%, #b8e6ff 100%);
+  overflow:hidden;
 }
 
-.sky{
-  background:linear-gradient(180deg,#0a0e27 0%,#1a237e 40%,#311b92 100%);
+/* PORTAL EFFECT IN CORNER */
+.portal{
+  position:absolute;
+  top:10%;
+  right:8%;
+  width:140px;
+  height:140px;
+  background:radial-gradient(circle, #00ff41 0%, #00cc33 30%, transparent 70%);
+  border-radius:50%;
+  animation:portalSpin 4s linear infinite;
+  opacity:0.7;
   z-index:1;
 }
 
-.stars{
-  z-index:2;
+@keyframes portalSpin{
+  0%{transform:rotate(0deg) scale(1)}
+  50%{transform:rotate(180deg) scale(1.1)}
+  100%{transform:rotate(360deg) scale(1)}
 }
 
-.mountains{
-  background:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80') center bottom/cover no-repeat;
-  filter:brightness(0.3) contrast(1.2);
+/* CARTOON CLOUDS */
+.cloud{
+  position:absolute;
+  background:#fff;
+  border-radius:100px;
+  opacity:0.9;
+  z-index:2;
+  animation:cloudDrift 60s linear infinite;
+}
+
+.cloud::before,
+.cloud::after{
+  content:'';
+  position:absolute;
+  background:#fff;
+  border-radius:50%;
+}
+
+.cloud::before{
+  width:80px;
+  height:80px;
+  top:-40px;
+  left:20px;
+}
+
+.cloud::after{
+  width:100px;
+  height:100px;
+  top:-50px;
+  right:20px;
+}
+
+.c1{width:200px;height:60px;top:15%;left:-220px}
+.c2{width:180px;height:55px;top:25%;left:-300px;animation-duration:70s}
+.c3{width:220px;height:65px;top:35%;left:-280px;animation-duration:50s}
+
+@keyframes cloudDrift{
+  from{transform:translateX(0)}
+  to{transform:translateX(120vw)}
+}
+
+/* CARTOON GRASS GROUND */
+.ground{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:25%;
+  background:linear-gradient(to bottom, #7ed957 0%, #5eb83e 100%);
+  border-top:6px solid #4a9933;
   z-index:3;
 }
 
-.trees{
-  background:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600&q=80') center bottom/cover no-repeat;
-  filter:brightness(0.4) saturate(1.3);
+.grass{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:40px;
+  background:repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 10px,
+    #6bc944 10px,
+    #6bc944 12px
+  );
   z-index:4;
 }
 
-.ground{
-  background:linear-gradient(to top,#0a1f0a 0%,transparent 50%);
-  z-index:5;
-}
-
-/* PARTICLES */
-.particle{
+/* CARTOON TREES */
+.tree{
   position:absolute;
-  background:radial-gradient(circle,rgba(255,255,255,.9),transparent);
+  bottom:25%;
+  z-index:3;
+}
+
+.tree-trunk{
+  width:30px;
+  height:80px;
+  background:#8b4513;
+  border:3px solid #5d2e0f;
+  border-radius:8px;
+  margin:0 auto;
+}
+
+.tree-leaves{
+  width:100px;
+  height:100px;
+  background:#3fa535;
+  border:4px solid #2d7a28;
   border-radius:50%;
-  pointer-events:none;
-  animation:float 8s infinite ease-in-out;
+  margin-bottom:-20px;
 }
 
-@keyframes float{
-  0%,100%{transform:translateY(0) translateX(0);opacity:.6}
-  50%{transform:translateY(-30px) translateX(20px);opacity:1}
-}
+.t1{left:8%;transform:scale(1.1)}
+.t2{left:20%;transform:scale(0.9)}
+.t3{left:85%;transform:scale(1.05)}
+.t4{right:15%;transform:scale(0.95)}
 
-/* MOON */
-.moon{
+/* CARTOON FLOWERS */
+.flower{
   position:absolute;
-  top:8%;right:12%;
-  width:140px;height:140px;
-  background:radial-gradient(circle at 35% 35%,#fef9c3,#fde047);
-  border-radius:50%;
-  box-shadow:0 0 80px rgba(253,224,71,.6),inset -10px -10px 30px rgba(0,0,0,.2);
-  z-index:2;
-  animation:moonGlow 4s ease-in-out infinite alternate;
+  bottom:26%;
+  z-index:4;
 }
 
-@keyframes moonGlow{
-  0%{box-shadow:0 0 80px rgba(253,224,71,.6),inset -10px -10px 30px rgba(0,0,0,.2)}
-  100%{box-shadow:0 0 120px rgba(253,224,71,.8),inset -10px -10px 30px rgba(0,0,0,.2)}
+.flower-petals{
+  width:40px;
+  height:40px;
+  position:relative;
+  animation:flowerBob 3s ease-in-out infinite;
 }
 
-/* ANIMATED ELEMENTS */
-.firefly{
+@keyframes flowerBob{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-5px) rotate(3deg)}
+}
+
+.petal{
   position:absolute;
-  width:4px;height:4px;
-  background:#fbbf24;
+  width:16px;
+  height:16px;
+  background:#ff69b4;
+  border:2px solid #ff1493;
+  border-radius:50% 50% 0 50%;
+}
+
+.petal:nth-child(1){top:-10px;left:12px;transform:rotate(0deg)}
+.petal:nth-child(2){top:2px;right:-2px;transform:rotate(72deg)}
+.petal:nth-child(3){bottom:0;right:8px;transform:rotate(144deg)}
+.petal:nth-child(4){bottom:0;left:8px;transform:rotate(216deg)}
+.petal:nth-child(5){top:2px;left:-2px;transform:rotate(288deg)}
+
+.flower-center{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:12px;
+  height:12px;
+  background:#ffd700;
+  border:2px solid #ff8c00;
   border-radius:50%;
-  box-shadow:0 0 10px #fbbf24;
-  z-index:6;
-  animation:fireflyMove 12s infinite ease-in-out;
 }
 
-@keyframes fireflyMove{
-  0%{transform:translate(0,0);opacity:.3}
-  25%{transform:translate(100px,-80px);opacity:1}
-  50%{transform:translate(-50px,-120px);opacity:.4}
-  75%{transform:translate(120px,-60px);opacity:1}
-  100%{transform:translate(0,0);opacity:.3}
+.flower-stem{
+  width:4px;
+  height:30px;
+  background:#4a9933;
+  border:1px solid #2d7a28;
+  margin:0 auto;
 }
 
-/* BIG BLUE DINO - CENTER, 3D EFFECT */
+.f1{left:12%;animation-delay:0s}
+.f2{left:25%;animation-delay:0.5s}
+.f3{left:40%;animation-delay:1s}
+.f4{left:60%;animation-delay:0.3s}
+.f5{left:75%;animation-delay:0.7s}
+.f6{left:88%;animation-delay:0.2s}
+
+/* BIG CARTOON BLUE DINO - CENTERED */
 .dino{
   position:absolute;
-  bottom:18%;
+  bottom:26%;
   left:50%;
   transform:translateX(-50%);
-  width:280px;
-  z-index:7;
-  filter:drop-shadow(0 20px 40px rgba(0,0,0,.5));
-  transition:transform .3s cubic-bezier(.68,-.55,.27,1.55);
+  width:200px;
+  height:180px;
+  z-index:5;
+  animation:dinoBreathe 2s ease-in-out infinite;
 }
 
-.dino:hover{
-  transform:translateX(-50%) translateY(-10px) scale(1.05);
+@keyframes dinoBreathe{
+  0%,100%{transform:translateX(-50%) scale(1)}
+  50%{transform:translateX(-50%) scale(1.03)}
 }
 
 .dino-body{
-  position:relative;
-  width:280px;height:200px;
+  position:absolute;
+  bottom:20px;
+  left:30px;
+  width:140px;
+  height:80px;
+  background:#5eb0ef;
+  border:4px solid #2563eb;
+  border-radius:60% 60% 50% 50%;
 }
 
-.dino svg{
-  width:100%;height:100%;
-  filter:drop-shadow(0 10px 30px rgba(96,165,250,.4));
+.dino-neck{
+  position:absolute;
+  bottom:65px;
+  left:50px;
+  width:30px;
+  height:60px;
+  background:#5eb0ef;
+  border:4px solid #2563eb;
+  border-radius:20px;
 }
 
-/* PINK BOW */
+.dino-head{
+  position:absolute;
+  bottom:115px;
+  left:30px;
+  width:70px;
+  height:55px;
+  background:#5eb0ef;
+  border:4px solid #2563eb;
+  border-radius:50%;
+}
+
+.dino-eye{
+  position:absolute;
+  top:18px;
+  left:22px;
+  width:14px;
+  height:14px;
+  background:#fff;
+  border:3px solid #1e293b;
+  border-radius:50%;
+  animation:eyeBlink 4s infinite;
+}
+
+@keyframes eyeBlink{
+  0%,98%,100%{height:14px}
+  99%{height:2px}
+}
+
+.dino-pupil{
+  position:absolute;
+  top:2px;
+  left:3px;
+  width:6px;
+  height:6px;
+  background:#000;
+  border-radius:50%;
+}
+
+.dino-smile{
+  position:absolute;
+  bottom:12px;
+  left:20px;
+  width:28px;
+  height:14px;
+  border-bottom:4px solid #1e3a8a;
+  border-radius:0 0 20px 20px;
+}
+
+.dino-tail{
+  position:absolute;
+  bottom:50px;
+  right:10px;
+  width:70px;
+  height:16px;
+  background:#5eb0ef;
+  border:4px solid #2563eb;
+  border-radius:0 30px 30px 0;
+  transform-origin:left center;
+  animation:tailWag 1.2s ease-in-out infinite;
+}
+
+@keyframes tailWag{
+  0%{transform:rotate(-15deg)}
+  50%{transform:rotate(15deg)}
+  100%{transform:rotate(-15deg)}
+}
+
+.dino-leg{
+  position:absolute;
+  bottom:0;
+  width:22px;
+  height:28px;
+  background:#3b82f6;
+  border:3px solid #1e3a8a;
+  border-radius:6px;
+}
+
+.leg1{left:55px}
+.leg2{left:90px}
+
+/* CARTOON BOW - ON HEAD */
 .bow{
   position:absolute;
-  top:10%;right:15%;
-  width:50px;height:40px;
-  z-index:8;
-  animation:bowBounce 2s ease-in-out infinite;
+  top:-8px;
+  right:2px;
+  width:45px;
+  height:32px;
+  z-index:6;
 }
 
-@keyframes bowBounce{
-  0%,100%{transform:translateY(0) rotate(0deg)}
-  50%{transform:translateY(-8px) rotate(5deg)}
-}
-
-.bow::before,.bow::after{
-  content:"";
+.bow-left,
+.bow-right{
   position:absolute;
-  width:22px;height:22px;
-  background:linear-gradient(135deg,#fda4af,#fb7185);
-  border-radius:50% 0 50% 0;
-  box-shadow:0 4px 12px rgba(251,113,133,.5);
+  width:18px;
+  height:20px;
+  background:#ff69b4;
+  border:3px solid #ff1493;
+  border-radius:50% 50% 0 50%;
 }
 
-.bow::before{
-  left:0;transform:rotate(-45deg);
+.bow-left{
+  left:0;
+  transform:rotate(-45deg);
 }
 
-.bow::after{
-  right:0;transform:rotate(45deg);
+.bow-right{
+  right:0;
+  transform:rotate(45deg);
 }
 
 .bow-knot{
   position:absolute;
-  top:50%;left:50%;
+  top:50%;
+  left:50%;
   transform:translate(-50%,-50%);
-  width:14px;height:14px;
-  background:#ec4899;
+  width:14px;
+  height:14px;
+  background:#ff1493;
+  border:2px solid #c71585;
   border-radius:50%;
-  box-shadow:0 0 10px rgba(236,72,153,.8);
 }
 
-/* CARD - GLASSMORPHISM */
+/* CARD - CARTOON STYLE */
 .card{
   position:absolute;
   top:8%;
   left:50%;
   transform:translateX(-50%);
   width:90%;
-  max-width:380px;
-  background:rgba(15,23,42,.75);
-  backdrop-filter:blur(20px) saturate(180%);
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:24px;
+  max-width:400px;
+  background:#fff;
+  border:5px solid #1e293b;
+  border-radius:20px;
   padding:1.8rem 1.6rem 1.5rem;
-  box-shadow:0 20px 60px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.1);
+  box-shadow:8px 8px 0 rgba(0,0,0,0.2);
   z-index:10;
   text-align:center;
-  color:#fff;
-  animation:cardSlideIn .8s cubic-bezier(.68,-.55,.27,1.55);
-}
-
-@keyframes cardSlideIn{
-  from{transform:translateX(-50%) translateY(-100px);opacity:0}
-  to{transform:translateX(-50%) translateY(0);opacity:1}
 }
 
 .badge{
-  display:inline-flex;
-  align-items:center;
-  gap:.5rem;
-  padding:.4rem 1rem;
-  background:linear-gradient(135deg,rgba(251,113,133,.2),rgba(236,72,153,.2));
-  border:1px solid rgba(251,113,133,.4);
-  border-radius:999px;
-  font-size:.72rem;
+  display:inline-block;
+  padding:0.5rem 1.2rem;
+  background:#ff69b4;
+  border:3px solid #ff1493;
+  border-radius:20px;
+  color:#fff;
+  font-size:0.75rem;
+  font-weight:bold;
   text-transform:uppercase;
-  letter-spacing:.15em;
-  color:#fda4af;
-  margin-bottom:.8rem;
-}
-
-.heart-pulse{
-  width:8px;height:8px;
-  background:#ec4899;
-  border-radius:50%;
-  box-shadow:0 0 12px #ec4899;
-  animation:pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse{
-  0%,100%{transform:scale(1);opacity:1}
-  50%{transform:scale(1.3);opacity:.7}
+  letter-spacing:0.1em;
+  margin-bottom:0.8rem;
+  box-shadow:3px 3px 0 rgba(0,0,0,0.2);
 }
 
 h1{
-  font-size:1.6rem;
-  margin-bottom:.6rem;
-  background:linear-gradient(135deg,#fff,#cbd5e1);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  font-weight:700;
+  font-size:1.8rem;
+  color:#1e293b;
+  margin-bottom:0.6rem;
+  text-shadow:2px 2px 0 rgba(0,0,0,0.1);
 }
 
 .subtitle{
-  font-size:.88rem;
-  color:#94a3b8;
+  font-size:0.95rem;
+  color:#475569;
   line-height:1.5;
   margin-bottom:1.2rem;
 }
 
 .buttons{
   display:flex;
-  gap:.8rem;
+  gap:1rem;
   justify-content:center;
   position:relative;
-  min-height:48px;
+  min-height:52px;
 }
 
 button{
-  padding:.65rem 1.5rem;
-  border:none;
-  border-radius:999px;
-  font-size:.92rem;
-  font-weight:600;
+  padding:0.75rem 1.5rem;
+  border:4px solid;
+  border-radius:12px;
+  font-size:1rem;
+  font-weight:bold;
+  font-family:'Comic Sans MS',cursive;
   cursor:pointer;
-  transition:all .25s cubic-bezier(.68,-.55,.27,1.55);
+  transition:all 0.15s ease;
+  box-shadow:4px 4px 0 rgba(0,0,0,0.3);
   position:relative;
-  overflow:hidden;
 }
 
-button::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle at center,rgba(255,255,255,.2),transparent);
-  opacity:0;
-  transition:opacity .3s ease;
-}
-
-button:hover::before{
-  opacity:1;
+button:active{
+  transform:translate(2px,2px);
+  box-shadow:2px 2px 0 rgba(0,0,0,0.3);
 }
 
 .btn-yes{
-  background:linear-gradient(135deg,#10b981,#059669);
+  background:#10b981;
+  border-color:#047857;
   color:#fff;
-  box-shadow:0 10px 30px rgba(16,185,129,.5),inset 0 1px 0 rgba(255,255,255,.2);
-  min-width:120px;
+  min-width:130px;
   z-index:2;
 }
 
 .btn-yes:hover{
-  transform:translateY(-3px) scale(1.05);
-  box-shadow:0 15px 40px rgba(16,185,129,.7),inset 0 1px 0 rgba(255,255,255,.2);
-}
-
-.btn-yes:active{
-  transform:translateY(-1px) scale(1.02);
+  background:#059669;
+  transform:translateY(-2px);
+  box-shadow:6px 6px 0 rgba(0,0,0,0.3);
 }
 
 .btn-no{
-  background:linear-gradient(135deg,#6366f1,#4f46e5);
+  background:#6366f1;
+  border-color:#4338ca;
   color:#fff;
-  box-shadow:0 8px 24px rgba(99,102,241,.4);
-  min-width:100px;
+  min-width:110px;
   position:absolute;
-  z-index:1;
+  left:50%;
+  transform:translateX(-50%);
+  user-select:none;
 }
 
-/* CELEBRATION SCREEN */
+/* CELEBRATION */
 .celebration{
   position:fixed;
   inset:0;
-  background:radial-gradient(circle at center,#10b981,#059669,#047857);
+  background:linear-gradient(135deg, #fbbf24 0%, #10b981 50%, #3b82f6 100%);
   display:none;
   align-items:center;
   justify-content:center;
   flex-direction:column;
   z-index:100;
-  animation:celebrateFadeIn .6s ease;
 }
 
 .celebration.active{
   display:flex;
+  animation:celebratePop 0.5s cubic-bezier(.68,-0.55,.27,1.55);
 }
 
-@keyframes celebrateFadeIn{
-  from{opacity:0;transform:scale(1.1)}
-  to{opacity:1;transform:scale(1)}
+@keyframes celebratePop{
+  from{transform:scale(0);opacity:0}
+  to{transform:scale(1);opacity:1}
 }
 
 .celebration h1{
-  font-size:clamp(3rem,10vw,5rem);
+  font-size:clamp(3rem,12vw,5rem);
+  color:#fff;
+  text-shadow:6px 6px 0 rgba(0,0,0,0.3);
   margin-bottom:1rem;
-  text-shadow:0 6px 20px rgba(0,0,0,.3);
-  animation:celebrateText 1.5s ease-in-out infinite;
+  animation:celebrateWiggle 1s ease-in-out infinite;
 }
 
-@keyframes celebrateText{
-  0%,100%{transform:scale(1) rotate(0deg)}
-  50%{transform:scale(1.08) rotate(-2deg)}
+@keyframes celebrateWiggle{
+  0%,100%{transform:rotate(0deg) scale(1)}
+  25%{transform:rotate(-5deg) scale(1.05)}
+  75%{transform:rotate(5deg) scale(1.05)}
 }
 
 .celebration p{
-  font-size:1.2rem;
+  font-size:1.3rem;
+  color:#fff;
   margin-bottom:2rem;
-  opacity:.95;
+  text-shadow:3px 3px 0 rgba(0,0,0,0.2);
 }
 
 .celebration .dino{
-  margin-bottom:1.5rem;
-  animation:celebrateDino 2s ease-in-out infinite;
+  margin-bottom:2rem;
+  animation:celebrateBounce 1s ease-in-out infinite;
 }
 
-@keyframes celebrateDino{
-  0%,100%{transform:translateX(-50%) translateY(0) rotate(0deg)}
-  25%{transform:translateX(-50%) translateY(-15px) rotate(-5deg)}
-  75%{transform:translateX(-50%) translateY(-10px) rotate(5deg)}
+@keyframes celebrateBounce{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(-20px)}
 }
 
 .back-btn{
-  padding:.7rem 2rem;
+  padding:0.8rem 2rem;
   background:#fff;
-  color:#047857;
-  border:none;
-  border-radius:999px;
-  font-size:.95rem;
-  font-weight:700;
+  border:4px solid #1e293b;
+  border-radius:12px;
+  color:#1e293b;
+  font-size:1rem;
+  font-weight:bold;
+  font-family:'Comic Sans MS',cursive;
   cursor:pointer;
-  box-shadow:0 12px 40px rgba(0,0,0,.3);
-  transition:transform .2s ease;
+  box-shadow:6px 6px 0 rgba(0,0,0,0.4);
+  transition:all 0.15s ease;
 }
 
 .back-btn:hover{
   transform:translateY(-3px);
+  box-shadow:8px 8px 0 rgba(0,0,0,0.4);
+}
+
+.back-btn:active{
+  transform:translate(3px,3px);
+  box-shadow:3px 3px 0 rgba(0,0,0,0.4);
 }
 
 /* CONFETTI */
 .confetti{
   position:absolute;
-  width:10px;
-  height:10px;
-  background:#fbbf24;
-  border-radius:50%;
-  animation:confettiFall 6s linear infinite;
+  width:12px;
+  height:12px;
+  border:2px solid #000;
+  border-radius:2px;
+  animation:confettiFall 5s linear infinite;
 }
 
 @keyframes confettiFall{
@@ -391,108 +552,136 @@ button:hover::before{
 }
 
 @media(max-width:640px){
-  .dino{width:220px;bottom:15%}
+  .dino{width:160px;height:150px;bottom:28%}
   .card{padding:1.4rem 1.2rem}
-  h1{font-size:1.3rem}
+  h1{font-size:1.5rem}
 }
 </style>
 </head>
 <body>
 
-<!-- CUSTOM CURSOR -->
-<div class="cursor" id="cursor"></div>
+<div class="scene">
+  <div class="portal"></div>
+  
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
 
-<!-- PARALLAX LAYERS -->
-<div class="layer sky"></div>
-<canvas class="layer stars" id="stars"></canvas>
-<div class="layer mountains"></div>
-<div class="layer trees"></div>
-<div class="layer ground"></div>
-
-<div class="moon"></div>
-
-<!-- PARTICLES -->
-<script>
-for(let i=0;i<20;i++){
-  const p=document.createElement('div');
-  p.className='particle';
-  p.style.width=Math.random()*4+2+'px';
-  p.style.height=p.style.width;
-  p.style.left=Math.random()*100+'%';
-  p.style.top=Math.random()*100+'%';
-  p.style.animationDelay=Math.random()*8+'s';
-  p.style.animationDuration=Math.random()*6+6+'s';
-  document.body.appendChild(p);
-}
-</script>
-
-<!-- FIREFLIES -->
-<script>
-for(let i=0;i<15;i++){
-  const f=document.createElement('div');
-  f.className='firefly';
-  f.style.left=Math.random()*100+'%';
-  f.style.top=Math.random()*60+20+'%';
-  f.style.animationDelay=Math.random()*12+'s';
-  f.style.animationDuration=Math.random()*8+8+'s';
-  document.body.appendChild(f);
-}
-</script>
-
-<!-- BIG BLUE DINO -->
-<div class="dino" id="dino">
-  <div class="dino-body">
-    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="dinoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1"/>
-          <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1"/>
-        </linearGradient>
-        <filter id="dinoShadow">
-          <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
-          <feOffset dx="0" dy="8" result="offsetblur"/>
-          <feComponentTransfer>
-            <feFuncA type="linear" slope="0.3"/>
-          </feComponentTransfer>
-          <feMerge>
-            <feMergeNode/>
-            <feMergeNode in="SourceGraphic"/>
-          </feMerge>
-        </filter>
-      </defs>
-      <!-- Body -->
-      <ellipse cx="100" cy="140" rx="60" ry="35" fill="url(#dinoGrad)" filter="url(#dinoShadow)"/>
-      <!-- Neck -->
-      <ellipse cx="90" cy="110" rx="20" ry="35" fill="url(#dinoGrad)"/>
-      <!-- Head -->
-      <ellipse cx="80" cy="75" rx="30" ry="28" fill="url(#dinoGrad)"/>
-      <!-- Eye -->
-      <circle cx="75" cy="70" r="6" fill="#1e293b"/>
-      <circle cx="77" cy="68" r="2" fill="#fff"/>
-      <!-- Smile -->
-      <path d="M 70 82 Q 80 88 90 82" stroke="#1e3a8a" stroke-width="2" fill="none" stroke-linecap="round"/>
-      <!-- Tail -->
-      <path d="M 150 130 Q 180 120 190 140" stroke="url(#dinoGrad)" stroke-width="18" fill="none" stroke-linecap="round"/>
-      <!-- Legs -->
-      <ellipse cx="85" cy="170" rx="10" ry="15" fill="#3b82f6"/>
-      <ellipse cx="115" cy="170" rx="10" ry="15" fill="#3b82f6"/>
-    </svg>
+  <div class="tree t1">
+    <div class="tree-leaves"></div>
+    <div class="tree-trunk"></div>
   </div>
-  <div class="bow">
-    <div class="bow-knot"></div>
+  <div class="tree t2">
+    <div class="tree-leaves"></div>
+    <div class="tree-trunk"></div>
+  </div>
+  <div class="tree t3">
+    <div class="tree-leaves"></div>
+    <div class="tree-trunk"></div>
+  </div>
+  <div class="tree t4">
+    <div class="tree-leaves"></div>
+    <div class="tree-trunk"></div>
+  </div>
+
+  <div class="flower f1">
+    <div class="flower-petals">
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="flower-center"></div>
+    </div>
+    <div class="flower-stem"></div>
+  </div>
+  <div class="flower f2">
+    <div class="flower-petals">
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="flower-center"></div>
+    </div>
+    <div class="flower-stem"></div>
+  </div>
+  <div class="flower f3">
+    <div class="flower-petals">
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="flower-center"></div>
+    </div>
+    <div class="flower-stem"></div>
+  </div>
+  <div class="flower f4">
+    <div class="flower-petals">
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="flower-center"></div>
+    </div>
+    <div class="flower-stem"></div>
+  </div>
+  <div class="flower f5">
+    <div class="flower-petals">
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="flower-center"></div>
+    </div>
+    <div class="flower-stem"></div>
+  </div>
+  <div class="flower f6">
+    <div class="flower-petals">
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="flower-center"></div>
+    </div>
+    <div class="flower-stem"></div>
+  </div>
+
+  <div class="ground"></div>
+  <div class="grass"></div>
+
+  <!-- BIG CARTOON DINO CENTER -->
+  <div class="dino">
+    <div class="dino-body"></div>
+    <div class="dino-neck"></div>
+    <div class="dino-head">
+      <div class="dino-eye">
+        <div class="dino-pupil"></div>
+      </div>
+      <div class="dino-smile"></div>
+      <div class="bow">
+        <div class="bow-left"></div>
+        <div class="bow-right"></div>
+        <div class="bow-knot"></div>
+      </div>
+    </div>
+    <div class="dino-tail"></div>
+    <div class="dino-leg leg1"></div>
+    <div class="dino-leg leg2"></div>
   </div>
 </div>
 
 <!-- CARD -->
 <div class="card">
-  <div class="badge">
-    <span class="heart-pulse"></span>
-    <span>for simeeee</span>
-  </div>
-  <h1>Will you be my Valentine?</h1>
-  <p class="subtitle">The blue dino with the pink bow is nervously waiting for your answer 💙</p>
+  <div class="badge">💙 FOR SIMEEEE 💙</div>
+  <h1>Be my Valentine?</h1>
+  <p class="subtitle">The blue dino with the pink bow is really hoping you'll say yes!</p>
   <div class="buttons">
-    <button class="btn-yes" id="yesBtn">Yes 💙</button>
+    <button class="btn-yes" id="yesBtn">YES! 💙</button>
     <button class="btn-no" id="noBtn">No</button>
   </div>
 </div>
@@ -500,158 +689,120 @@ for(let i=0;i<15;i++){
 <!-- CELEBRATION -->
 <div class="celebration" id="celebration">
   <h1>YAY! 💙✨</h1>
-  <p>Simeeee said yes!</p>
+  <p>Simeeee said YES!</p>
   <div class="dino">
-    <div class="dino-body">
-      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="dinoGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1"/>
-            <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1"/>
-          </linearGradient>
-        </defs>
-        <ellipse cx="100" cy="140" rx="60" ry="35" fill="url(#dinoGrad2)"/>
-        <ellipse cx="90" cy="110" rx="20" ry="35" fill="url(#dinoGrad2)"/>
-        <ellipse cx="80" cy="75" rx="30" ry="28" fill="url(#dinoGrad2)"/>
-        <circle cx="75" cy="70" r="6" fill="#1e293b"/>
-        <circle cx="77" cy="68" r="2" fill="#fff"/>
-        <path d="M 70 82 Q 80 88 90 82" stroke="#1e3a8a" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <path d="M 150 130 Q 180 120 190 140" stroke="url(#dinoGrad2)" stroke-width="18" fill="none" stroke-linecap="round"/>
-        <ellipse cx="85" cy="170" rx="10" ry="15" fill="#3b82f6"/>
-        <ellipse cx="115" cy="170" rx="10" ry="15" fill="#3b82f6"/>
-      </svg>
+    <div class="dino-body"></div>
+    <div class="dino-neck"></div>
+    <div class="dino-head">
+      <div class="dino-eye">
+        <div class="dino-pupil"></div>
+      </div>
+      <div class="dino-smile"></div>
+      <div class="bow">
+        <div class="bow-left"></div>
+        <div class="bow-right"></div>
+        <div class="bow-knot"></div>
+      </div>
     </div>
-    <div class="bow">
-      <div class="bow-knot"></div>
-    </div>
+    <div class="dino-tail"></div>
+    <div class="dino-leg leg1"></div>
+    <div class="dino-leg leg2"></div>
   </div>
-  <button class="back-btn" onclick="hideCelebration()">Back to the forest</button>
+  <button class="back-btn" onclick="hideCelebration()">Back to the scene</button>
 </div>
 
-<!-- AUDIO -->
-<audio id="bgMusic" loop>
-  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_1b7e7c5c3d.mp3" type="audio/mp3">
-</audio>
-
 <script>
-// CURSOR
-const cursor=document.getElementById('cursor');
-document.addEventListener('mousemove',e=>{
-  cursor.style.left=e.clientX+'px';
-  cursor.style.top=e.clientY+'px';
-});
-document.querySelectorAll('button').forEach(btn=>{
-  btn.addEventListener('mouseenter',()=>cursor.classList.add('hover'));
-  btn.addEventListener('mouseleave',()=>cursor.classList.remove('hover'));
-});
-
-// STARS
-const canvas=document.getElementById('stars');
-const ctx=canvas.getContext('2d');
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-const stars=[];
-for(let i=0;i<200;i++){
-  stars.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*1.5,
-    a:Math.random()
-  });
-}
-function drawStars(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  stars.forEach(s=>{
-    ctx.beginPath();
-    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(255,255,255,${s.a})`;
-    ctx.fill();
-    s.a+=Math.random()*.02-.01;
-    if(s.a>1)s.a=1;
-    if(s.a<0.3)s.a=0.3;
-  });
-  requestAnimationFrame(drawStars);
-}
-drawStars();
-
-// PARALLAX
-document.addEventListener('mousemove',e=>{
-  const x=(e.clientX/window.innerWidth-.5)*30;
-  const y=(e.clientY/window.innerHeight-.5)*30;
-  document.querySelector('.mountains').style.transform=`translate(${x*1.5}px,${y*1.5}px)`;
-  document.querySelector('.trees').style.transform=`translate(${x*2.5}px,${y*2.5}px)`;
-  document.querySelector('.dino').style.transform=`translateX(-50%) translate(${x*.8}px,${y*.8}px)`;
-});
-
-// BUTTONS
 const yesBtn=document.getElementById('yesBtn');
 const noBtn=document.getElementById('noBtn');
 const celebration=document.getElementById('celebration');
-const bgMusic=document.getElementById('bgMusic');
-let started=false;
 
-document.body.addEventListener('click',()=>{
-  if(!started){
-    bgMusic.volume=0.3;
-    bgMusic.play();
-    started=true;
-  }
-},{once:true});
+// GAME-LIKE NO BUTTON PHYSICS
+let noX=0;
+let noY=0;
+let noVelX=0;
+let noVelY=0;
 
-let noCount=0;
-let noBtnLeft=null;
-let noBtnTop=null;
+function initNoBtn(){
+  const rect=noBtn.getBoundingClientRect();
+  const cardRect=document.querySelector('.card').getBoundingClientRect();
+  noX=rect.left-cardRect.left;
+  noY=rect.top-cardRect.top;
+}
 
-function moveNoButton(e){
+initNoBtn();
+
+let isMoving=false;
+
+function gameLoop(){
   const card=document.querySelector('.card');
-  const rect=card.getBoundingClientRect();
+  const cardRect=card.getBoundingClientRect();
+  const btnW=noBtn.offsetWidth;
+  const btnH=noBtn.offsetHeight;
   
-  if(noBtnLeft===null){
-    const btnRect=noBtn.getBoundingClientRect();
-    noBtnLeft=btnRect.left-rect.left;
-    noBtnTop=btnRect.top-rect.top;
+  // Apply velocity
+  noX+=noVelX;
+  noY+=noVelY;
+  
+  // Friction
+  noVelX*=0.92;
+  noVelY*=0.92;
+  
+  // Bounce off walls
+  const padding=10;
+  if(noX<padding){
+    noX=padding;
+    noVelX=Math.abs(noVelX)*0.7;
+  }
+  if(noX>cardRect.width-btnW-padding){
+    noX=cardRect.width-btnW-padding;
+    noVelX=-Math.abs(noVelX)*0.7;
+  }
+  if(noY<padding){
+    noY=padding;
+    noVelY=Math.abs(noVelY)*0.7;
+  }
+  if(noY>cardRect.height-btnH-padding){
+    noY=cardRect.height-btnH-padding;
+    noVelY=-Math.abs(noVelY)*0.7;
   }
   
-  const mouseX=e.clientX;
-  const mouseY=e.clientY;
+  // Update position
+  noBtn.style.position='absolute';
+  noBtn.style.left=noX+'px';
+  noBtn.style.top=noY+'px';
   
-  const btnAbsX=rect.left+noBtnLeft+noBtn.offsetWidth/2;
-  const btnAbsY=rect.top+noBtnTop+noBtn.offsetHeight/2;
-  
-  const dx=mouseX-btnAbsX;
-  const dy=mouseY-btnAbsY;
-  const distance=Math.hypot(dx,dy);
-  const threshold=180;
-  
-  if(distance<threshold){
-    noCount++;
-    if(noCount===2)noBtn.textContent='Really? 🥺';
-    if(noCount===3)noBtn.textContent='Think again 😢';
-    if(noCount>=4){
-      noBtn.style.display='none';
-      setTimeout(()=>{
-        noBtn.style.display='block';
-        noBtn.textContent='No';
-      },3000);
-    }
-    
-    const angle=Math.atan2(dy,dx);
-    const flee=threshold-distance+80;
-    
-    noBtnLeft-=Math.cos(angle)*flee;
-    noBtnTop-=Math.sin(angle)*flee;
-    
-    const padding=15;
-    noBtnLeft=Math.min(rect.width-noBtn.offsetWidth-padding,Math.max(padding,noBtnLeft));
-    noBtnTop=Math.min(rect.height-noBtn.offsetHeight-padding,Math.max(padding,noBtnTop));
-    
-    noBtn.style.position='absolute';
-    noBtn.style.left=noBtnLeft+'px';
-    noBtn.style.top=noBtnTop+'px';
+  if(isMoving){
+    requestAnimationFrame(gameLoop);
   }
 }
 
-document.querySelector('.card').addEventListener('mousemove',moveNoButton);
+document.addEventListener('mousemove',e=>{
+  const cardRect=document.querySelector('.card').getBoundingClientRect();
+  const mouseX=e.clientX-cardRect.left;
+  const mouseY=e.clientY-cardRect.top;
+  
+  const btnCenterX=noX+noBtn.offsetWidth/2;
+  const btnCenterY=noY+noBtn.offsetHeight/2;
+  
+  const dx=mouseX-btnCenterX;
+  const dy=mouseY-btnCenterY;
+  const dist=Math.sqrt(dx*dx+dy*dy);
+  
+  const threshold=120;
+  
+  if(dist<threshold){
+    const force=threshold-dist;
+    const angle=Math.atan2(dy,dx);
+    
+    noVelX-=Math.cos(angle)*force*0.15;
+    noVelY-=Math.sin(angle)*force*0.15;
+    
+    if(!isMoving){
+      isMoving=true;
+      gameLoop();
+    }
+  }
+});
 
 yesBtn.addEventListener('click',()=>{
   celebration.classList.add('active');
@@ -668,20 +819,20 @@ function hideCelebration(){
 }
 
 function spawnConfetti(){
-  const colors=['#10b981','#3b82f6','#f59e0b','#ec4899','#8b5cf6','#ef4444'];
-  for(let i=0;i<80;i++){
+  const colors=['#10b981','#3b82f6','#f59e0b','#ec4899','#8b5cf6','#ef4444','#06b6d4'];
+  for(let i=0;i<70;i++){
     const c=document.createElement('div');
     c.className='confetti';
-    const size=Math.random()*12+8;
+    const size=Math.random()*14+8;
     c.style.width=size+'px';
     c.style.height=size+'px';
     c.style.left=Math.random()*100+'vw';
     c.style.top=(Math.random()*60-30)+'vh';
     c.style.background=colors[Math.floor(Math.random()*colors.length)];
-    c.style.animationDuration=(5+Math.random()*4)+'s';
+    c.style.animationDuration=(4+Math.random()*3)+'s';
     c.style.animationDelay=Math.random()*2+'s';
     celebration.appendChild(c);
-    setTimeout(()=>c.remove(),12000);
+    setTimeout(()=>c.remove(),8000);
   }
 }
 </script>
