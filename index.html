@@ -2,559 +2,480 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Rocky & Simmie: Maybe It’s Love</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rocky & Simmie – Maybe It’s Love</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    :root{
-      --pink:#ff8fb7;
-      --hot-pink:#ff4b8a;
-      --forest1:#2f5d3a;
-      --forest2:#447a4d;
-      --forest3:#153322;
-      --panel-bg:#fffafc;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{
-      font-family:"Comic Sans MS","Arial Rounded MT",system-ui,cursive;
-      min-height:100vh;
-      background:
-        radial-gradient(circle at 10% 0,#ffffff40 0,transparent 55%),
-        radial-gradient(circle at 90% 100%,#ffffff25 0,transparent 55%),
-        linear-gradient(135deg,var(--forest1),var(--forest2),var(--forest3));
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      padding:20px;
-      color:#24303a;
-    }
-    .book{
-      max-width:1000px;
-      width:100%;
-      background:#fef5ff;
-      border-radius:24px;
-      box-shadow:0 20px 60px #00000055;
-      padding:24px 18px 30px;
-      border:4px solid #ffffffaa;
-      position:relative;
-      overflow:hidden;
-    }
-    .title-bar{
-      text-align:center;
-      margin-bottom:10px;
-    }
-    .title-bar h1{
-      font-size:2rem;
-      color:#fff;
-      text-shadow:0 0 8px #ffbddd;
-    }
-    .title-bar p{
-      font-size:.9rem;
-      color:#ffe5f5;
-      letter-spacing:.03em;
+    :root {
+      --pink: #ff9ac8;
+      --dark-pink: #ff4f9a;
+      --forest1: #8fbc8f;
+      --forest2: #228b22;
+      --forest3: #2f4f2f;
+      --text-main: #263238;
     }
 
-    /* Comic layout */
-    .screen{
-      display:none;
-      animation:fadeIn .5s ease;
-    }
-    .screen.active{display:block;}
-    .panels{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:16px;
-      margin-top:12px;
-    }
-    .panel{
-      background:var(--panel-bg);
-      border-radius:18px;
-      padding:14px;
-      border:3px solid #00000015;
-      box-shadow:4px 6px 0 #00000025;
-      position:relative;
-      overflow:hidden;
-    }
-    .panel::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:radial-gradient(circle at 0 0,#ffffff60 0,transparent 60%);
-      opacity:.6;
-      pointer-events:none;
-    }
-    .panel img{
-      width:100%;
-      border-radius:14px;
-      display:block;
-      box-shadow:0 8px 18px #00000025;
-    }
-    .panel-caption{
-      margin-top:8px;
-      font-size:.96rem;
-      line-height:1.5;
-    }
-    .bubble{
-      position:absolute;
-      padding:8px 10px;
-      background:#fff;
-      border-radius:18px;
-      font-size:.8rem;
-      max-width:70%;
-      box-shadow:0 4px 10px #00000030;
-      border:2px solid #00000020;
-    }
-    .bubble.rocky{bottom:16px;left:14px;}
-    .bubble.simmie{top:16px;right:14px;}
-    .bubble span.tag{font-weight:bold;color:var(--hot-pink);margin-right:4px;}
-
-    .nav{
-      display:flex;
-      justify-content:space-between;
-      gap:8px;
-      margin-top:18px;
-    }
-    .btn{
-      flex:1;
-      border:none;
-      border-radius:999px;
-      padding:11px 10px;
-      font-weight:bold;
-      font-size:.98rem;
-      cursor:pointer;
-      background:linear-gradient(135deg,var(--pink),var(--hot-pink));
-      color:#fff;
-      box-shadow:0 6px 14px #ff4b8a66;
-      transition:transform .2s,box-shadow .2s,filter .2s;
-    }
-    .btn.secondary{
-      background:#ffffff;
-      color:#444;
-      box-shadow:0 4px 10px #00000020;
-    }
-    .btn:disabled{
-      opacity:.4;
-      cursor:default;
-      box-shadow:none;
-    }
-    .btn:hover:not(:disabled){
-      transform:translateY(-2px);
-      box-shadow:0 10px 18px #ff4b8a88;
-      filter:brightness(1.03);
-    }
-    .btn:active:not(:disabled){
-      transform:translateY(0);
-      box-shadow:0 4px 10px #ff4b8a66;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    .page-indicator{
-      text-align:center;
-      margin-top:6px;
-      font-size:.8rem;
-      color:#ffe0f1;
+    body {
+      font-family: "Comic Sans MS", "Arial Rounded MT Bold", system-ui, -apple-system,
+        BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.3), transparent 60%),
+                  radial-gradient(circle at 80% 80%, rgba(255,255,255,0.2), transparent 60%),
+                  linear-gradient(135deg, var(--forest1), var(--forest2), var(--forest3));
+      color: var(--text-main);
     }
 
-    @keyframes fadeIn{
-      from{opacity:0;transform:translateY(10px);}
-      to{opacity:1;transform:translateY(0);}
+    .storybook {
+      width: 95%;
+      max-width: 880px;
+      background: #ffffff;
+      border-radius: 30px;
+      padding: 32px 22px 26px;
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.35);
+      position: relative;
+      overflow: hidden;
     }
 
-    /* Puzzle */
-    .puzzle-wrap{
-      margin-top:8px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:10px;
-    }
-    .puzzle-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:4px;
-      max-width:420px;
-      width:100%;
-    }
-    .piece{
-      aspect-ratio:1;
-      border-radius:10px;
-      background-size:300% 300%;
-      background-image:url("https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/4fac3e96-c834-4c6f-80fd-9992dc7d25d9");
-      border:2px solid #ffffff;
-      box-shadow:0 4px 8px #00000030;
-      cursor:pointer;
-      transition:transform .16s,border-color .16s,box-shadow .16s;
-    }
-    .piece.selected{
-      transform:scale(.95);
-      border-color:var(--hot-pink);
-      box-shadow:0 0 0 3px #ffb3d7;
-    }
-    .piece.solved{
-      border-color:#9cff8c;
-      box-shadow:0 0 0 2px #7cff64,0 6px 12px #00000030;
+    .header {
+      text-align: center;
+      margin-bottom: 6px;
     }
 
-    .puzzle-hint{
-      font-size:.85rem;
-      color:#555;
-      text-align:center;
-    }
-    .puzzle-complete-preview{
-      margin-top:10px;
-      text-align:center;
-      display:none;
-    }
-    .puzzle-complete-preview img{
-      max-width:260px;
-      width:100%;
-      border-radius:18px;
-      box-shadow:0 8px 18px #00000040;
+    .header h1 {
+      font-size: 2rem;
+      color: var(--dark-pink);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.12);
     }
 
-    /* Question screen */
-    .question-big{
-      font-size:1.6rem;
-      text-align:center;
-      margin:8px 0 14px;
-      color:var(--hot-pink);
-      text-shadow:0 0 6px #ffffffaa;
-    }
-    .q-buttons{
-      display:flex;
-      gap:16px;
-      justify-content:center;
-      margin-top:6px;
-      flex-wrap:wrap;
-    }
-    #yesBtn{
-      min-width:140px;
-      font-size:1.05rem;
-    }
-    #noBtn{
-      min-width:90px;
-      background:#ffffff;
-      color:#555;
-      border:2px solid #ffd0e6;
-      box-shadow:0 3px 8px #00000025;
-      position:relative;
+    .header p {
+      margin-top: 6px;
+      font-size: 0.95rem;
+      color: #607078;
     }
 
-    /* Celebration */
-    .celebration-art{
-      margin-top:8px;
-      text-align:center;
-    }
-    .celebration-art img{
-      max-width:320px;
-      width:100%;
-      border-radius:26px;
-      box-shadow:0 16px 32px #00000055;
-    }
-    .confetti-heart{
-      position:fixed;
-      pointer-events:none;
-      font-size:1.6rem;
-      animation:fall 4s linear infinite;
-      opacity:0;
-      z-index:50;
-    }
-    @keyframes fall{
-      0%{transform:translateY(-10vh) scale(.8);opacity:1;}
-      100%{transform:translateY(110vh) scale(1.1);opacity:0;}
+    .screen {
+      display: none;
+      animation: fadeIn 0.6s ease;
     }
 
-    @media(max-width:700px){
-      .book{padding:18px 12px 24px;}
-      h1{font-size:1.5rem;}
-      .panel{padding:10px;}
-      .panel-caption{font-size:.9rem;}
+    .screen.active {
+      display: block;
+    }
+
+    .screen-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 24px;
+      align-items: center;
+      padding: 10px 6px 0;
+    }
+
+    .screen-image {
+      position: relative;
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+      background: linear-gradient(135deg, #e3f2fd, #fce4ec);
+    }
+
+    .screen-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+    }
+
+    .image-tag {
+      position: absolute;
+      bottom: 10px;
+      right: 14px;
+      background: rgba(0, 0, 0, 0.55);
+      color: #fff;
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      backdrop-filter: blur(4px);
+    }
+
+    .text-block {
+      padding-right: 6px;
+    }
+
+    .text-block h2 {
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+      color: #37474f;
+    }
+
+    .text-block p {
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    .soft {
+      color: #6c7a80;
+      font-size: 0.95rem;
+    }
+
+    .highlight {
+      color: var(--dark-pink);
+      font-weight: 600;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      padding: 0 4px;
+    }
+
+    .page-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #e0e0e0;
+      transition: all 0.25s ease;
+    }
+
+    .dot.active {
+      width: 24px;
+      border-radius: 999px;
+      background: var(--dark-pink);
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 9px 22px;
+      background: linear-gradient(135deg, var(--pink), var(--dark-pink));
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.98rem;
+      box-shadow: 0 9px 18px rgba(255, 105, 180, 0.45);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(255, 105, 180, 0.6);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: 0 7px 14px rgba(255, 105, 180, 0.4);
+    }
+
+    .btn.secondary {
+      background: #eceff1;
+      color: #546e7a;
+      box-shadow: none;
+    }
+
+    .btn.secondary:hover {
+      box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .subtle {
+      font-size: 0.85rem;
+      color: #78909c;
+    }
+
+    /* Heart particles on last screen */
+    .heart-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 1.2rem;
+      animation: floatHeart 5s linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes floatHeart {
+      0% { transform: translateY(20px) scale(0.8); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-140px) scale(1.1); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes glow {
+      0%,100% { box-shadow: 0 0 0 rgba(255,79,154,0); }
+      50% { box-shadow: 0 0 14px rgba(255,79,154,0.8); }
+    }
+
+    .soft-glow {
+      animation: glow 2.4s ease-in-out infinite;
+    }
+
+    @media (max-width: 720px) {
+      .screen-inner {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .screen-image {
+        max-width: 360px;
+        margin: 0 auto;
+      }
+      .text-block {
+        text-align: center;
+        padding: 0 4px;
+      }
+      .nav {
+        flex-direction: column-reverse;
+        gap: 10px;
+      }
     }
   </style>
 </head>
 <body>
-<div class="book">
-  <div class="title-bar">
-    <h1>Rocky & Simmie: Maybe It’s Love</h1>
-    <p>A tiny dino comic for almost‑Valentine’s Day</p>
-  </div>
-
-  <!-- Screen 1 -->
-  <section class="screen active" id="screen1">
-    <div class="panels">
-      <div class="panel">
-        <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/516f905e-ac34-4096-8d23-0c9bbc78e8e4.png" alt="Rocky in the forest" />
-        <div class="bubble rocky">
-          <span class="tag">Rocky:</span> New day, new rocks, same forest. Kinda peaceful though.
-        </div>
-        <p class="panel-caption">
-          Rocky is a green T‑Rex who looks tough but actually has a very soft heart. He spends his days exploring Dino Forest and collecting rocks that “have good vibes.”
-        </p>
-      </div>
+  <div class="storybook">
+    <div class="header">
+      <h1>Rocky &amp; Simmie: Maybe It’s Love</h1>
+      <p>A tiny story about two dinos with gently mending hearts.</p>
     </div>
-  </section>
 
-  <!-- Screen 2 -->
-  <section class="screen" id="screen2">
-    <div class="panels">
-      <div class="panel">
-        <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/b5416b19-1da8-41ac-87ff-9392c39995ce.png" alt="Simmie by the lake" />
-        <div class="bubble simmie">
-          <span class="tag">Simmie:</span> Stars look even prettier in books and in the water.
+    <!-- Screen 1: Two quiet hearts -->
+    <section class="screen active" id="screen1">
+      <div class="screen-inner">
+        <div class="screen-image soft-glow">
+          <!-- Rocky alone in forest – use your Rocky image URL here -->
+          <img src="ROCKY_IMAGE_URL" alt="Rocky in the forest" />
+          <div class="image-tag">Rocky, trying to feel okay again</div>
         </div>
-        <p class="panel-caption">
-          Down by the lake, Simmie, a blue sauropod with a tiny pink bow, reads about constellations and watches the sky in the water’s reflection. She likes quiet places and big dreams.
-        </p>
-      </div>
-      <div class="panel">
-        <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/516f905e-ac34-4096-8d23-0c9bbc78e8e4.png" alt="Rocky noticing Simmie" />
-        <div class="bubble rocky">
-          <span class="tag">Rocky:</span> Okay who is that… and why does my heart feel weird?
-        </div>
-        <p class="panel-caption">
-          Rocky spots Simmie for the first time. He tells himself it’s “just curiosity,” but his fast heartbeat is low‑key saying something else.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Screen 3 -->
-  <section class="screen" id="screen3">
-    <div class="panels">
-      <div class="panel">
-        <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/83432735-94b2-4c7a-9e78-4c3809a47b2b.png" alt="Rocky and Simmie with flowers" />
-        <div class="bubble rocky">
-          <span class="tag">Rocky:</span> So you like flowers and stars. I like rocks… and this.
-        </div>
-        <div class="bubble simmie" style="bottom:16px;right:14px;">
-          <span class="tag">Simmie:</span> This is nice. We should explore more spots like this.
-        </div>
-        <p class="panel-caption">
-          They hang out more: trading flower spots, rock stories, and quiet laughs. It isn’t “a date,” but the forest keeps acting like it knows something they don’t.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Screen 4 -->
-  <section class="screen" id="screen4">
-    <div class="panels">
-      <div class="panel">
-        <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/113ceb80-541a-4ed4-8773-6265fd5c5d93.png" alt="Rocky building a puzzle" />
-        <div class="bubble rocky">
-          <span class="tag">Rocky:</span> Valentine’s Day is almost here… maybe I make something that says “I like you” but also “no pressure.” 
-        </div>
-        <p class="panel-caption">
-          With Valentine’s Day coming soon, Rocky builds a heart‑shaped picture of the two of them. If Simmie likes the puzzle, maybe she likes the dino who made it too.
-        </p>
-      </div>
-      <div class="panel">
-        <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/4fac3e96-c834-4c6f-80fd-9992dc7d25d9" alt="Puzzle reference" />
-        <p class="panel-caption">
-          He cuts the picture into little pieces, shuffles them, and decides to turn his feelings into a tiny game.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Screen 5 – Puzzle -->
-  <section class="screen" id="screen5">
-    <div class="panels">
-      <div class="panel">
-        <h2 style="font-size:1.2rem;margin-bottom:6px;">Puzzle Time: Rocky’s Little Hint</h2>
-        <p class="panel-caption">
-          Help Rocky fix the puzzle he made for Simmie. Click one tile, then another tile, to swap them. When the heart looks right, the message is clear: maybe it’s love now.
-        </p>
-        <div class="puzzle-wrap">
-          <div class="puzzle-grid" id="puzzleGrid"></div>
-          <p class="puzzle-hint">
-            Tip: corners first, then edges, then the middle. You got this. 💕
+        <div class="text-block">
+          <h2>Two quiet hearts</h2>
+          <p>
+            This is <span class="highlight">Rocky</span>. He looks tough, but his heart has a few tiny cracks.
           </p>
-          <div class="puzzle-complete-preview" id="puzzlePreview">
-            <p style="margin-bottom:6px;font-weight:bold;color:#e4427a;">
-              You fixed it! This is how Rocky sees them. ✨
-            </p>
-            <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/4fac3e96-c834-4c6f-80fd-9992dc7d25d9" alt="Finished heart puzzle" />
+          <p class="soft">
+            Most days he just walks through the forest, collecting little rocks and trying to breathe a bit easier.
+          </p>
+          <p>
+            Somewhere not too far away, another heart is doing the same thing, in her own gentle way.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen 2: When paths cross -->
+    <section class="screen" id="screen2">
+      <div class="screen-inner">
+        <div class="screen-image">
+          <!-- Simmie by the lake – use your Simmie image URL here -->
+          <img src="SIMMIE_IMAGE_URL" alt="Simmie by the lake" />
+          <div class="image-tag">Simmie, blue bow and soft eyes</div>
+        </div>
+        <div class="text-block">
+          <h2>When paths quietly cross</h2>
+          <p>
+            One calm afternoon, Rocky sees <span class="highlight">Simmie</span> by the water – soft blue, tiny pink bow, lost in her book.
+          </p>
+          <p class="soft">
+            She looks kind. A little shy. Maybe a little broken in the same places.
+          </p>
+          <p>
+            They don’t say much at first. But somehow, the forest feels lighter with both of them in it.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen 3: Friends, maybe more -->
+    <section class="screen" id="screen3">
+      <div class="screen-inner">
+        <div class="screen-image">
+          <!-- Both together – flowers / nature -->
+          <img src="TOGETHER_IMAGE_URL" alt="Rocky and Simmie together" />
+          <div class="image-tag">Two friends finding small things to smile about</div>
+        </div>
+        <div class="text-block">
+          <h2>Friends, slowly stitching up</h2>
+          <p>
+            Days turn into little rituals: shared walks, favourite flowers, quiet jokes only they find funny.
+          </p>
+          <p class="soft">
+            Rocky starts to laugh again. Simmie’s smiles last a bit longer. Their broken pieces don’t vanish, but they feel a little softer together.
+          </p>
+          <p>
+            With Valentine’s Day getting closer, Rocky keeps wondering:
+            maybe this isn’t <em>just</em> friendship anymore.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen 4: The puzzle & the question -->
+    <section class="screen" id="screen4">
+      <div class="screen-inner">
+        <div class="screen-image" id="puzzleWrapper">
+          <!-- Heart-shaped Rocky & Simmie puzzle image -->
+          <img src="PUZZLE_IMAGE_URL" alt="Rocky and Simmie heart puzzle" />
+          <div class="image-tag">Two hearts, a little braver together</div>
+        </div>
+        <div class="text-block">
+          <h2>Maybe now it’s love</h2>
+          <p>
+            Rocky isn’t great with big speeches. So he keeps it simple, honest, and soft – just like the way she makes him feel.
+          </p>
+          <p class="soft">
+            If you’re reading this, it probably means he trusts you with that tiny, quiet question in his chest.
+          </p>
+          <p>
+            So here it is, as gently as he can say it:
+            <br /><br />
+            <span class="highlight">“Would you like to be my Valentine?”</span>
+          </p>
+          <div style="margin-top: 14px; display: flex; flex-wrap: wrap; gap: 10px;">
+            <button class="btn" id="yesBtn">
+              Yes, let’s see where this goes 💚
+            </button>
+            <button class="btn secondary" id="softNoBtn">
+              I care about you, maybe just as friends 💙
+            </button>
           </div>
+          <p id="responseText" class="soft" style="margin-top: 10px;"></p>
         </div>
       </div>
-    </div>
-  </section>
+      <div class="heart-layer" id="heartLayer"></div>
+    </section>
 
-  <!-- Screen 6 – Question -->
-  <section class="screen" id="screen6">
-    <div class="panels">
-      <div class="panel">
-        <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/4fac3e96-c834-4c6f-80fd-9992dc7d25d9" alt="Rocky and Simmie heart" />
-        <div class="bubble rocky">
-          <span class="tag">Rocky:</span> So… if this puzzle made you smile, I kinda hope I do too.
-        </div>
-        <div class="bubble simmie">
-          <span class="tag">Simmie:</span> Rocky, this is the cutest thing anyone’s done for me.
-        </div>
-        <p class="panel-caption">
-          The puzzle is done, the heart is whole, and the forest feels extra quiet. It might still be “just friendship,” but honestly… it doesn’t really look like <i>just</i> friendship anymore.
-        </p>
+    <!-- Navigation -->
+    <div class="nav">
+      <div class="nav-left">
+        <button class="btn secondary" id="backBtn">← Back</button>
+        <span class="subtle" id="screenLabel">Page 1 of 4</span>
       </div>
-      <div class="panel">
-        <p class="question-big">
-          If this were you, would you be<br/>Rocky’s Valentine?
-        </p>
-        <p class="panel-caption" style="text-align:center;">
-          (Saying “no” might be physically impossible. The button is scared of commitment.)
-        </p>
-        <div class="q-buttons">
-          <button class="btn" id="yesBtn" type="button">Yes, obviously 💚</button>
-          <button class="btn secondary" id="noBtn" type="button">Umm… no?</button>
-        </div>
+      <div class="page-dots">
+        <div class="dot active" data-page="1"></div>
+        <div class="dot" data-page="2"></div>
+        <div class="dot" data-page="3"></div>
+        <div class="dot" data-page="4"></div>
       </div>
+      <button class="btn" id="nextBtn">
+        Next page →
+      </button>
     </div>
-  </section>
-
-  <!-- Screen 7 – Celebration -->
-  <section class="screen" id="screen7">
-    <div class="panels">
-      <div class="panel">
-        <div class="celebration-art">
-          <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/9a3fb800-6314-41bd-9512-6be1da297095" alt="Rocky and Simmie celebrating" />
-        </div>
-        <p class="panel-caption" style="text-align:center;">
-          Rocky gives Simmie a forest bouquet, Simmie can’t stop smiling, and Dino Forest logs a new event: <b>“maybe friends, maybe more.”</b><br/><br/>
-          Whatever the label is today, one thing is clear—this story is not ending any time soon.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <div class="nav">
-    <button class="btn secondary" id="prevBtn" type="button" disabled>← Back</button>
-    <button class="btn" id="nextBtn" type="button">Next →</button>
   </div>
-  <div class="page-indicator" id="pageIndicator">Page 1 / 7</div>
-</div>
 
-<script>
-  const totalScreens = 7;
-  let current = 1;
+  <script>
+    const screens = [
+      document.getElementById("screen1"),
+      document.getElementById("screen2"),
+      document.getElementById("screen3"),
+      document.getElementById("screen4"),
+    ];
+    const dots = Array.from(document.querySelectorAll(".dot"));
+    const backBtn = document.getElementById("backBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const label = document.getElementById("screenLabel");
+    const yesBtn = document.getElementById("yesBtn");
+    const softNoBtn = document.getElementById("softNoBtn");
+    const responseText = document.getElementById("responseText");
+    const heartLayer = document.getElementById("heartLayer");
 
-  const prevBtn = document.getElementById("prevBtn");
-  const nextBtn = document.getElementById("nextBtn");
-  const pageIndicator = document.getElementById("pageIndicator");
+    let current = 0;
 
-  function showScreen(n){
-    document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
-    document.getElementById("screen"+n).classList.add("active");
-    prevBtn.disabled = n===1;
-    nextBtn.disabled = n===totalScreens;
-    nextBtn.textContent = n===totalScreens-1 ? "See what happens →" :
-                          n===totalScreens ? "Done" : "Next →";
-    pageIndicator.textContent = "Page " + n + " / " + totalScreens;
-  }
-
-  prevBtn.addEventListener("click",()=>{ if(current>1){current--;showScreen(current);} });
-  nextBtn.addEventListener("click",()=>{
-    if(current<totalScreens){
-      current++;
-      showScreen(current);
-      if(current===5 && !puzzleInitialized) initPuzzle();
+    function updateView() {
+      screens.forEach((s, i) => {
+        s.classList.toggle("active", i === current);
+      });
+      dots.forEach((d, i) => {
+        d.classList.toggle("active", i === current);
+      });
+      label.textContent = `Page ${current + 1} of ${screens.length}`;
+      backBtn.style.opacity = current === 0 ? "0.4" : "1";
+      backBtn.style.pointerEvents = current === 0 ? "none" : "auto";
+      nextBtn.style.opacity = current === screens.length - 1 ? "0.4" : "1";
+      nextBtn.style.pointerEvents = current === screens.length - 1 ? "none" : "auto";
     }
-  });
 
-  /* 3x3 click‑swap puzzle */
-  let puzzleOrder = [];
-  let firstPick = null;
-  let puzzleInitialized = false;
-
-  function initPuzzle(){
-    const grid = document.getElementById("puzzleGrid");
-    grid.innerHTML = "";
-    puzzleOrder = [...Array(9).keys()];
-    // shuffle
-    for(let i=puzzleOrder.length-1;i>0;i--){
-      const j=Math.floor(Math.random()*(i+1));
-      [puzzleOrder[i],puzzleOrder[j]]=[puzzleOrder[j],puzzleOrder[i]];
-    }
-    puzzleOrder.forEach((pos,index)=>{
-      const div=document.createElement("div");
-      div.className="piece";
-      div.dataset.index=index;
-      div.dataset.pos=pos;
-      const col=pos%3,row=Math.floor(pos/3);
-      const x=["0%","50%","100%"][col];
-      const y=["0%","50%","100%"][row];
-      div.style.backgroundPosition=`${x} ${y}`;
-      div.addEventListener("click",()=>selectPiece(index));
-      grid.appendChild(div);
+    backBtn.addEventListener("click", () => {
+      if (current > 0) {
+        current -= 1;
+        updateView();
+      }
     });
-    puzzleInitialized=true;
-  }
 
-  function selectPiece(i){
-    const pieces=document.querySelectorAll(".piece");
-    if(firstPick===null){
-      firstPick=i;
-      pieces[i].classList.add("selected");
-      return;
-    }
-    if(firstPick===i){
-      pieces[i].classList.remove("selected");
-      firstPick=null;
-      return;
-    }
-    // swap visual + data
-    const a=pieces[firstPick], b=pieces[i];
-    const posA=a.dataset.pos,posB=b.dataset.pos;
-    a.dataset.pos=posB; b.dataset.pos=posA;
-    const colA=posB%3,rowA=Math.floor(posB/3);
-    const colB=posA%3,rowB=Math.floor(posA/3);
-    a.style.backgroundPosition=[["0%","50%","100%"][colA],["0%","50%","100%"][rowA]].join(" ");
-    b.style.backgroundPosition=[["0%","50%","100%"][colB],["0%","50%","100%"][rowB]].join(" ");
-    pieces.forEach(p=>p.classList.remove("selected"));
-    firstPick=null;
-    checkSolved();
-  }
-
-  function checkSolved(){
-    const pieces=document.querySelectorAll(".piece");
-    let ok=true;
-    pieces.forEach((p,idx)=>{
-      if(+p.dataset.pos!==idx) ok=false;
+    nextBtn.addEventListener("click", () => {
+      if (current < screens.length - 1) {
+        current += 1;
+        updateView();
+      }
     });
-    if(ok){
-      pieces.forEach(p=>p.classList.add("solved"));
-      document.getElementById("puzzlePreview").style.display="block";
-      setTimeout(()=>{ current=6; showScreen(current); },1200);
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        current = index;
+        updateView();
+      });
+    });
+
+    function spawnHearts() {
+      heartLayer.innerHTML = "";
+      const colors = ["#ff8fb5", "#ffb3c8", "#ffcdd5", "#ffffff"];
+      for (let i = 0; i < 26; i++) {
+        const h = document.createElement("div");
+        h.className = "heart";
+        h.textContent = "❤";
+        h.style.left = Math.random() * 100 + "%";
+        h.style.bottom = "-40px";
+        h.style.animationDelay = (Math.random() * 3).toFixed(2) + "s";
+        h.style.animationDuration = (3 + Math.random() * 3).toFixed(2) + "s";
+        h.style.color = colors[Math.floor(Math.random() * colors.length)];
+        heartLayer.appendChild(h);
+      }
     }
-  }
 
-  /* Question buttons */
-  const yesBtn=document.getElementById("yesBtn");
-  const noBtn=document.getElementById("noBtn");
+    yesBtn.addEventListener("click", () => {
+      responseText.textContent =
+        "Thank you for being gentle with Rocky’s little dinosaur heart. He’s very, very happy right now. 💚";
+      spawnHearts();
+    });
 
-  yesBtn.addEventListener("click",()=>{
-    current=7;
-    showScreen(current);
-    spawnHearts();
-  });
+    softNoBtn.addEventListener("click", () => {
+      responseText.textContent =
+        "Thank you for reading his story and being kind. Your honesty still means a lot. 💙";
+      heartLayer.innerHTML = "";
+    });
 
-  noBtn.addEventListener("mouseover",()=>{
-    const maxX=window.innerWidth-140;
-    const maxY=window.innerHeight-80;
-    noBtn.style.position="fixed";
-    noBtn.style.left=Math.random()*maxX+"px";
-    noBtn.style.top=Math.random()*maxY+"px";
-  });
-
-  function spawnHearts(){
-    for(let i=0;i<40;i++){
-      const h=document.createElement("div");
-      h.className="confetti-heart";
-      h.textContent=["💕","💖","💘","💗","💓"][Math.floor(Math.random()*5)];
-      h.style.left=Math.random()*100+"vw";
-      h.style.animationDelay=(Math.random()*2)+"s";
-      h.style.animationDuration=(3+Math.random()*2)+"s";
-      document.body.appendChild(h);
-      setTimeout(()=>h.remove(),6000);
-    }
-  }
-</script>
+    // Initial state
+    updateView();
+  </script>
 </body>
 </html>
