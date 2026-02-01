@@ -11,8 +11,7 @@
       height:100vh;
       overflow:hidden;
       font-family:'Georgia',serif;
-      background:linear-gradient(180deg,#87CEEB 0%,#E0F6FF 50%,#90EE90 100%);
-      color:#1a1a1a;
+      background:#87CEEB;
       position:relative;
     }
 
@@ -21,391 +20,270 @@
       width:100%;
       height:100%;
       overflow:hidden;
+      background:url('https://images.unsplash.com/photo-1500964757637-c85e8a162699?w=1600&q=80') center/cover;
     }
 
-    /* Sky */
-    .sky{
-      position:absolute;inset:0;
-      background:linear-gradient(180deg,#87CEEB 0%,#B0E0E6 40%,#E0F6FF 70%);
-      z-index:0;
-    }
-
-    /* Sun */
-    .sun{
+    /* Overlay for better card readability */
+    .scene:after{
+      content:'';
       position:absolute;
-      top:8%;right:12%;
-      width:140px;height:140px;
-      border-radius:50%;
-      background:radial-gradient(circle at 35% 35%,#FFF8DC,#FFD700 50%,#FFA500 90%);
-      box-shadow:0 0 80px rgba(255,215,0,0.8);
+      inset:0;
+      background:linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.3) 100%);
+      pointer-events:none;
       z-index:1;
     }
 
-    /* Clouds - realistic white */
+    /* Realistic sun */
+    .sun{
+      position:absolute;
+      top:8%;right:10%;
+      width:160px;height:160px;
+      background:url('https://cdn.pixabay.com/photo/2017/02/12/10/29/sun-2059634_960_720.png') center/contain no-repeat;
+      z-index:2;
+      animation:sun-glow 4s ease-in-out infinite alternate;
+    }
+    @keyframes sun-glow{
+      0%{filter:brightness(1) drop-shadow(0 0 30px rgba(255,200,0,0.6))}
+      100%{filter:brightness(1.1) drop-shadow(0 0 50px rgba(255,200,0,0.8))}
+    }
+
+    /* Realistic clouds */
     .cloud{
       position:absolute;
-      opacity:0.85;
-      filter:blur(1px);
       z-index:2;
-      animation:cloud-drift 60s linear infinite;
+      animation:cloud-drift 70s linear infinite;
+      filter:drop-shadow(0 4px 8px rgba(0,0,0,0.1));
     }
-    .cloud img{
-      width:180px;
-      opacity:0.9;
-    }
-    .c1{top:8%;left:-200px;animation-delay:0s}
-    .c2{top:18%;left:-280px;animation-delay:10s}
-    .c3{top:12%;left:-240px;animation-delay:20s}
+    .c1{top:10%;left:-250px;width:200px;animation-delay:0s}
+    .c2{top:20%;left:-300px;width:220px;animation-delay:12s}
+    .c3{top:14%;left:-280px;width:190px;animation-delay:24s}
     @keyframes cloud-drift{
       0%{transform:translateX(0)}
       100%{transform:translateX(120vw)}
     }
 
-    /* Ground - grass meadow */
-    .ground{
+    /* Birds flying */
+    .bird{
       position:absolute;
-      bottom:0;left:0;
-      width:100%;height:45%;
-      background:linear-gradient(to bottom,#7FBF7F 0%,#6B8E23 60%,#556B2F 100%);
+      width:60px;
       z-index:3;
+      animation:bird-fly 14s ease-in-out infinite alternate;
+      filter:drop-shadow(0 2px 4px rgba(0,0,0,0.2));
     }
-
-    /* Flowers scattered */
-    .flower{
-      position:absolute;
-      bottom:8%;
-      width:50px;
-      z-index:4;
-      animation:flower-sway 3s ease-in-out infinite alternate;
+    @keyframes bird-fly{
+      0%{transform:translate(0,0)}
+      100%{transform:translate(100px,-30px)}
     }
-    @keyframes flower-sway{
-      0%{transform:rotate(-2deg)}
-      100%{transform:rotate(2deg)}
-    }
-    .f1{left:5%;bottom:10%;width:45px}
-    .f2{left:15%;bottom:12%;width:50px}
-    .f3{left:28%;bottom:9%;width:42px}
-    .f4{left:42%;bottom:11%;width:48px}
-    .f5{left:58%;bottom:10%;width:46px}
-    .f6{left:72%;bottom:12%;width:50px}
-    .f7{left:85%;bottom:9%;width:44px}
-    .f8{left:10%;bottom:18%;width:38px}
-    .f9{left:65%;bottom:17%;width:40px}
+    .b1{top:18%;left:12%;animation-delay:0s}
+    .b2{top:25%;left:68%;animation-delay:3s}
+    .b3{top:20%;left:45%;animation-delay:6s}
 
     /* Butterflies */
     .butterfly{
       position:absolute;
-      width:35px;
-      z-index:5;
-      animation:butterfly-fly 8s ease-in-out infinite alternate;
+      width:50px;
+      z-index:3;
+      animation:butterfly-float 10s ease-in-out infinite alternate;
+      filter:drop-shadow(0 2px 6px rgba(0,0,0,0.15));
     }
-    @keyframes butterfly-fly{
-      0%{transform:translate(0,0)}
-      100%{transform:translate(60px,-20px)}
+    @keyframes butterfly-float{
+      0%{transform:translate(0,0) rotate(0deg)}
+      100%{transform:translate(70px,-25px) rotate(10deg)}
     }
-    .bf1{top:30%;left:18%;animation-delay:0s}
-    .bf2{top:38%;left:70%;animation-delay:1.2s}
-    .bf3{top:25%;left:50%;animation-delay:2.4s}
+    .bf1{top:35%;left:20%;animation-delay:0s}
+    .bf2{top:42%;left:75%;animation-delay:2s}
+    .bf3{top:30%;left:55%;animation-delay:4s}
+    .bf4{top:48%;left:35%;animation-delay:1.5s}
 
-    /* Birds flying */
-    .bird{
+    /* Flowers on ground */
+    .flower{
       position:absolute;
-      width:40px;
-      z-index:5;
-      animation:bird-glide 12s ease-in-out infinite alternate;
+      bottom:10%;
+      width:70px;
+      z-index:4;
+      filter:drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+      animation:flower-sway 4s ease-in-out infinite alternate;
     }
-    @keyframes bird-glide{
-      0%{transform:translate(0,0)}
-      100%{transform:translate(80px,-15px)}
+    @keyframes flower-sway{
+      0%{transform:rotate(-3deg)}
+      100%{transform:rotate(3deg)}
     }
-    .b1{top:15%;left:8%;animation-delay:0s}
-    .b2{top:22%;left:65%;animation-delay:2s}
-    .b3{top:18%;left:40%;animation-delay:4s}
+    .f1{left:8%;bottom:12%;width:65px}
+    .f2{left:18%;bottom:14%;width:70px}
+    .f3{left:30%;bottom:11%;width:60px}
+    .f4{left:45%;bottom:13%;width:68px}
+    .f5{left:60%;bottom:12%;width:64px}
+    .f6{left:75%;bottom:14%;width:72px}
+    .f7{left:88%;bottom:11%;width:66px}
+    .f8{left:12%;bottom:20%;width:55px}
+    .f9{left:70%;bottom:19%;width:58px}
 
-    /* Swan in pond bottom left */
+    /* Swan realistic */
     .swan{
       position:absolute;
-      bottom:18%;left:8%;
-      width:90px;
-      z-index:6;
-      animation:swan-bob 4s ease-in-out infinite;
+      bottom:18%;left:10%;
+      width:120px;
+      z-index:5;
+      filter:drop-shadow(0 6px 12px rgba(0,0,0,0.25));
+      animation:swan-bob 5s ease-in-out infinite;
     }
     @keyframes swan-bob{
       0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-6px)}
+      50%{transform:translateY(-8px)}
     }
 
-    /* REALISTIC BLUE DINO - center big */
+    /* Realistic Blue Dino CENTER - photorealistic style */
     .dino{
       position:absolute;
-      bottom:16%;
+      bottom:14%;
       left:50%;
       transform:translateX(-50%);
-      width:280px;
-      z-index:7;
+      width:320px;
+      z-index:6;
+      filter:drop-shadow(0 12px 24px rgba(0,0,0,0.3));
+      animation:dino-breathe 3s ease-in-out infinite;
+    }
+    @keyframes dino-breathe{
+      0%,100%{transform:translateX(-50%) scale(1)}
+      50%{transform:translateX(-50%) scale(1.02)}
     }
 
-    /* Card - smaller, top center */
+    /* Card - glass effect, top center */
     .card{
       position:absolute;
-      top:12%;left:50%;
+      top:10%;left:50%;
       transform:translateX(-50%);
-      min-width:300px;max-width:380px;
-      background:rgba(255,255,255,0.95);
-      border-radius:16px;
-      padding:1.2rem 1.4rem 1.1rem;
+      min-width:320px;max-width:400px;
+      background:rgba(255,255,255,0.85);
+      backdrop-filter:blur(12px);
+      border-radius:20px;
+      padding:1.4rem 1.6rem 1.3rem;
       text-align:center;
-      color:#2c3e50;
-      box-shadow:0 12px 40px rgba(0,0,0,0.15);
-      border:2px solid rgba(100,100,100,0.2);
-      z-index:8;
+      color:#1e293b;
+      box-shadow:0 16px 48px rgba(0,0,0,0.2);
+      border:2px solid rgba(255,255,255,0.5);
+      z-index:10;
     }
     .card-pill{
       display:inline-flex;align-items:center;gap:0.4rem;
-      padding:0.3rem 0.9rem;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.18em;
-      border-radius:999px;background:#fce7f3;color:#9d174d;margin-bottom:0.6rem;
-      border:1px solid #f9a8d4;
+      padding:0.35rem 1rem;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.2em;
+      border-radius:999px;background:linear-gradient(135deg,#fce7f3,#fbcfe8);color:#9d174d;
+      margin-bottom:0.7rem;border:1px solid #f9a8d4;
+      box-shadow:0 2px 8px rgba(236,72,153,0.3);
     }
     .heart-dot{
-      width:8px;height:8px;border-radius:50%;
+      width:9px;height:9px;border-radius:50%;
       background:#ec4899;
-      box-shadow:0 0 8px rgba(236,72,153,0.9);
+      box-shadow:0 0 10px rgba(236,72,153,0.9);
+      animation:heart-beat 1.5s ease-in-out infinite;
+    }
+    @keyframes heart-beat{
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.15)}
     }
     .card h1{
-      font-size:1.3rem;margin-bottom:0.5rem;font-family:'Georgia',serif;color:#1e293b;
+      font-size:1.4rem;margin-bottom:0.6rem;font-family:'Georgia',serif;color:#0f172a;
+      text-shadow:0 1px 2px rgba(0,0,0,0.1);
     }
     .card small{
-      font-size:0.82rem;color:#64748b;
+      font-size:0.84rem;color:#475569;line-height:1.4;
     }
 
     .buttons{
-      margin-top:0.85rem;
-      display:flex;justify-content:center;gap:0.8rem;
+      margin-top:1rem;
+      display:flex;justify-content:center;gap:0.9rem;
       position:relative;
-      height:42px;
+      height:44px;
     }
     .btn{
-      padding:0.5rem 1.2rem;
+      padding:0.55rem 1.3rem;
       border-radius:999px;
       border:none;
       cursor:pointer;
-      font-size:0.88rem;
+      font-size:0.9rem;
       font-family:'Georgia',serif;
-      min-width:100px;
-      transition:transform 0.15s ease,box-shadow 0.15s ease;
+      min-width:105px;
+      transition:transform 0.2s ease,box-shadow 0.2s ease;
       position:relative;
+      font-weight:600;
     }
     .btn-yes{
       background:linear-gradient(135deg,#10b981,#059669);
       color:#fff;
-      box-shadow:0 8px 20px rgba(16,185,129,0.5);
+      box-shadow:0 8px 24px rgba(16,185,129,0.5);
       z-index:2;
     }
     .btn-yes:hover{
-      transform:translateY(-2px);
-      box-shadow:0 12px 28px rgba(16,185,129,0.7);
+      transform:translateY(-3px);
+      box-shadow:0 12px 32px rgba(16,185,129,0.7);
     }
     .btn-no{
-      background:#6366f1;
+      background:linear-gradient(135deg,#6366f1,#4f46e5);
       color:#fff;
-      box-shadow:0 6px 18px rgba(99,102,241,0.4);
+      box-shadow:0 6px 20px rgba(99,102,241,0.45);
       position:absolute;
       z-index:1;
     }
 
     @media(max-width:640px){
-      .card{top:10%;min-width:280px}
-      .dino{bottom:14%;width:240px}
+      .card{top:8%;min-width:300px}
+      .dino{bottom:12%;width:280px}
     }
 
-    /* CELEBRATION */
+    /* CELEBRATION - photorealistic confetti */
     .celebration{
       position:fixed;inset:0;
       background:linear-gradient(135deg,#fbbf24,#f59e0b,#10b981);
       display:flex;flex-direction:column;align-items:center;justify-content:center;
-      color:#1e293b;text-align:center;z-index:20;opacity:0;pointer-events:none;
-      transform:scale(1.05);transition:opacity 0.4s ease,transform 0.4s ease;
+      color:#0f172a;text-align:center;z-index:20;opacity:0;pointer-events:none;
+      transform:scale(1.05);transition:opacity 0.45s ease,transform 0.45s ease;
     }
     .celebration.active{opacity:1;pointer-events:auto;transform:scale(1)}
     .cele-title{
-      font-size:clamp(2.8rem,8vw,4rem);font-weight:900;margin-bottom:0.6rem;
-      font-family:'Georgia',serif;
+      font-size:clamp(3rem,9vw,4.5rem);font-weight:900;margin-bottom:0.8rem;
+      font-family:'Georgia',serif;text-shadow:0 4px 12px rgba(0,0,0,0.2);
     }
     .cele-sub{
-      font-size:1rem;margin-bottom:1.2rem;font-family:'Georgia',serif;
+      font-size:1.1rem;margin-bottom:1.4rem;font-family:'Georgia',serif;
     }
     .cele-dino{
-      width:280px;margin-bottom:1.2rem;
+      width:320px;margin-bottom:1.4rem;
+      filter:drop-shadow(0 16px 32px rgba(0,0,0,0.35));
     }
     .cele-btn{
-      margin-top:0.6rem;padding:0.5rem 1.3rem;border-radius:999px;border:none;
-      font-size:0.88rem;cursor:pointer;background:#fff;color:#1e293b;
-      box-shadow:0 10px 30px rgba(0,0,0,0.3);font-family:'Georgia',serif;
+      margin-top:0.7rem;padding:0.6rem 1.5rem;border-radius:999px;border:none;
+      font-size:0.9rem;cursor:pointer;background:#fff;color:#1e293b;
+      box-shadow:0 12px 36px rgba(0,0,0,0.35);font-family:'Georgia',serif;
+      font-weight:600;transition:transform 0.2s ease;
     }
+    .cele-btn:hover{transform:translateY(-2px)}
 
     .confetti-dot{
       position:absolute;border-radius:50%;opacity:0.9;
-      animation:confetti-fall 6s linear infinite;
+      animation:confetti-fall 7s ease-in infinite;
+      box-shadow:0 2px 6px rgba(0,0,0,0.2);
     }
     @keyframes confetti-fall{
-      0%{transform:translateY(-12vh) rotate(0deg)}
-      100%{transform:translateY(112vh) rotate(360deg)}
+      0%{transform:translateY(-15vh) rotate(0deg);opacity:1}
+      100%{transform:translateY(115vh) rotate(720deg);opacity:0.6}
     }
 
   </style>
 </head>
 <body>
   <div class="scene">
-    <div class="sky"></div>
+    
     <div class="sun"></div>
 
-    <!-- Clouds with white cloud emoji/shape -->
-    <div class="cloud c1" style="font-size:80px">☁️</div>
-    <div class="cloud c2" style="font-size:90px">☁️</div>
-    <div class="cloud c3" style="font-size:85px">☁️</div>
+    <!-- Realistic clouds -->
+    <img class="cloud c1" src="https://static.vecteezy.com/system/resources/previews/009/303/488/original/white-cloud-clipart-design-illustration-free-png.png" alt="">
+    <img class="cloud c2" src="https://static.vecteezy.com/system/resources/previews/009/303/488/original/white-cloud-clipart-design-illustration-free-png.png" alt="">
+    <img class="cloud c3" src="https://static.vecteezy.com/system/resources/previews/009/303/488/original/white-cloud-clipart-design-illustration-free-png.png" alt="">
 
-    <div class="ground"></div>
+    <!-- Realistic birds -->
+    <img class="bird b1" src="https://static.vecteezy.com/system/resources/thumbnails/024/095/252/small_2x/flying-bird-on-transparent-background-png.png" alt="">
+    <img class="bird b2" src="https://static.vecteezy.com/system/resources/thumbnails/024/095/252/small_2x/flying-bird-on-transparent-background-png.png" alt="">
+    <img class="bird b3" src="https://static.vecteezy.com/system/resources/thumbnails/024/095/252/small_2x/flying-bird-on-transparent-background-png.png" alt="">
 
-    <!-- Flowers - realistic emojis -->
-    <div class="flower f1" style="font-size:40px">🌸</div>
-    <div class="flower f2" style="font-size:45px">🌺</div>
-    <div class="flower f3" style="font-size:38px">🌼</div>
-    <div class="flower f4" style="font-size:44px">🌻</div>
-    <div class="flower f5" style="font-size:42px">🌷</div>
-    <div class="flower f6" style="font-size:46px">🌹</div>
-    <div class="flower f7" style="font-size:40px">🌸</div>
-    <div class="flower f8" style="font-size:36px">🌺</div>
-    <div class="flower f9" style="font-size:38px">🌼</div>
-
-    <!-- Butterflies -->
-    <div class="butterfly bf1" style="font-size:32px">🦋</div>
-    <div class="butterfly bf2" style="font-size:30px">🦋</div>
-    <div class="butterfly bf3" style="font-size:34px">🦋</div>
-
-    <!-- Birds -->
-    <div class="bird b1" style="font-size:36px">🐦</div>
-    <div class="bird b2" style="font-size:38px">🕊️</div>
-    <div class="bird b3" style="font-size:36px">🐦</div>
-
-    <!-- Swan -->
-    <div class="swan" style="font-size:80px">🦢</div>
-
-    <!-- Realistic Blue Dino with bow - CENTER BIG -->
-    <div class="dino">
-      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 280 200'%3E%3C!-- Body --%3E%3Cellipse cx='140' cy='140' rx='90' ry='60' fill='%2360a5fa' stroke='%232563eb' stroke-width='3'/%3E%3C!-- Neck --%3E%3Crect x='120' y='90' width='30' height='60' rx='15' fill='%2360a5fa' stroke='%232563eb' stroke-width='2'/%3E%3C!-- Head --%3E%3Cellipse cx='135' cy='60' rx='45' ry='35' fill='%2360a5fa' stroke='%232563eb' stroke-width='3'/%3E%3C!-- Eye --%3E%3Ccircle cx='145' cy='55' r='8' fill='%23fff'/%3E%3Ccircle cx='148' cy='53' r='4' fill='%231e293b'/%3E%3C!-- Smile --%3E%3Cpath d='M120 68 Q135 75 150 68' stroke='%231e293b' stroke-width='2' fill='none'/%3E%3C!-- Tail --%3E%3Cpath d='M210 125 Q240 110 250 140' stroke='%2360a5fa' stroke-width='22' fill='none' stroke-linecap='round'/%3E%3C!-- Legs --%3E%3Cellipse cx='110' cy='185' rx='14' ry='18' fill='%233b82f6'/%3E%3Cellipse cx='170' cy='185' rx='14' ry='18' fill='%233b82f6'/%3E%3C!-- Pink Bow on head --%3E%3Cellipse cx='165' cy='42' rx='12' ry='10' fill='%23ec4899' transform='rotate(-25 165 42)'/%3E%3Cellipse cx='185' cy='42' rx='12' ry='10' fill='%23ec4899' transform='rotate(25 185 42)'/%3E%3Ccircle cx='175' cy='40' r='6' fill='%23f9a8d4'/%3E%3C/svg%3E" alt="Blue Dino with Bow" style="width:100%;filter:drop-shadow(0 8px 12px rgba(0,0,0,0.2))">
-    </div>
-
-    <!-- CARD - small, not covering dino -->
-    <div class="card">
-      <div class="card-pill">
-        <span class="heart-dot"></span>
-        <span>for simeeee</span>
-      </div>
-      <h1>Be my Valentine?</h1>
-      <small>(the blue dino with the pink bow is really hoping you say yes)</small>
-
-      <div class="buttons">
-        <button class="btn btn-yes" id="yesBtn">Yes 💙</button>
-        <button class="btn btn-no" id="noBtn">No</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- CELEBRATION OVERLAY -->
-  <div class="celebration" id="celebration">
-    <div class="cele-title">YAY! 💙</div>
-    <div class="cele-sub">Simeeee said yes.</div>
-
-    <div class="cele-dino">
-      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 280 200'%3E%3Cellipse cx='140' cy='140' rx='90' ry='60' fill='%2360a5fa' stroke='%232563eb' stroke-width='3'/%3E%3Crect x='120' y='90' width='30' height='60' rx='15' fill='%2360a5fa' stroke='%232563eb' stroke-width='2'/%3E%3Cellipse cx='135' cy='60' rx='45' ry='35' fill='%2360a5fa' stroke='%232563eb' stroke-width='3'/%3E%3Ccircle cx='145' cy='55' r='8' fill='%23fff'/%3E%3Ccircle cx='148' cy='53' r='4' fill='%231e293b'/%3E%3Cpath d='M120 68 Q135 75 150 68' stroke='%231e293b' stroke-width='2' fill='none'/%3E%3Cpath d='M210 125 Q240 110 250 140' stroke='%2360a5fa' stroke-width='22' fill='none' stroke-linecap='round'/%3E%3Cellipse cx='110' cy='185' rx='14' ry='18' fill='%233b82f6'/%3E%3Cellipse cx='170' cy='185' rx='14' ry='18' fill='%233b82f6'/%3E%3Cellipse cx='165' cy='42' rx='12' ry='10' fill='%23ec4899' transform='rotate(-25 165 42)'/%3E%3Cellipse cx='185' cy='42' rx='12' ry='10' fill='%23ec4899' transform='rotate(25 185 42)'/%3E%3Ccircle cx='175' cy='40' r='6' fill='%23f9a8d4'/%3E%3C/svg%3E" alt="Blue Dino" style="width:100%;filter:drop-shadow(0 10px 16px rgba(0,0,0,0.25))">
-    </div>
-
-    <button class="cele-btn" onclick="hideCelebration()">back to the forest</button>
-  </div>
-
-  <script>
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
-    const celebration = document.getElementById("celebration");
-
-    let noBtnLeft = null;
-    let noBtnTop = null;
-
-    function moveNoButton(e){
-      const card = document.querySelector(".card");
-      const rect = card.getBoundingClientRect();
-
-      // Initialize position if first time
-      if(noBtnLeft === null){
-        const btnRect = noBtn.getBoundingClientRect();
-        noBtnLeft = btnRect.left - rect.left;
-        noBtnTop = btnRect.top - rect.top;
-      }
-
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
-
-      const btnAbsX = rect.left + noBtnLeft + noBtn.offsetWidth/2;
-      const btnAbsY = rect.top + noBtnTop + noBtn.offsetHeight/2;
-
-      const dx = mouseX - btnAbsX;
-      const dy = mouseY - btnAbsY;
-      const distance = Math.hypot(dx,dy);
-      const threshold = 140;
-
-      if(distance < threshold){
-        const angle = Math.atan2(dy,dx);
-        const flee = threshold - distance + 50;
-
-        noBtnLeft -= Math.cos(angle)*flee;
-        noBtnTop  -= Math.sin(angle)*flee;
-
-        // Keep in bounds
-        const padding = 10;
-        noBtnLeft = Math.min(rect.width - noBtn.offsetWidth - padding, Math.max(padding, noBtnLeft));
-        noBtnTop  = Math.min(rect.height - noBtn.offsetHeight - padding, Math.max(padding, noBtnTop));
-
-        noBtn.style.position = "absolute";
-        noBtn.style.left = noBtnLeft + "px";
-        noBtn.style.top  = noBtnTop + "px";
-      }
-    }
-
-    document.querySelector(".card").addEventListener("mousemove", moveNoButton);
-
-    yesBtn.addEventListener("click", () => {
-      showCelebration();
-    });
-
-    noBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-    });
-
-    function showCelebration(){
-      celebration.classList.add("active");
-      spawnConfetti();
-    }
-    function hideCelebration(){
-      celebration.classList.remove("active");
-    }
-
-    function spawnConfetti(){
-      const colors = ["#10b981","#3b82f6","#f59e0b","#ec4899","#eab308","#a855f7"];
-      for(let i=0;i<50;i++){
-        const dot = document.createElement("div");
-        dot.className = "confetti-dot";
-        const size = Math.random()*12+8;
-        dot.style.width = size+"px";
-        dot.style.height = size+"px";
-        dot.style.left = Math.random()*100+"vw";
-        dot.style.top  = (Math.random()*50-25)+"vh";
-        dot.style.background = colors[Math.floor(Math.random()*colors.length)];
-        dot.style.animationDuration = (5+Math.random()*3)+"s";
-        celebration.appendChild(dot);
-        setTimeout(()=>dot.remove(),8000);
-      }
-    }
-  </script>
-</body>
-</html>
+    <!-- Realistic butterflies -->
+    <img class="butterfly bf1" src="https://static.vecteezy.com/system/resources/th
