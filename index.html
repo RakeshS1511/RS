@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🦖💙 A Dino Love Story 🦕💚</title>
+    <title>🦖💙 A Dino Love Story 🦕💚 - Comic Book Edition</title>
     <style>
         :root {
             --color-bg-primary: #FFF0F5;
@@ -20,13 +20,17 @@
         }
 
         body {
-            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive;
-            background: linear-gradient(135deg, #FFE5EC 0%, #FFC9DE 100%);
+            font-family: 'Bangers', 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive;
+            background: #1a1a1a;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,.03) 3px, rgba(255,255,255,.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,.03) 3px, rgba(255,255,255,.03) 4px);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow-x: hidden;
+            padding: 20px;
         }
 
         .container {
@@ -37,11 +41,49 @@
 
         .screen {
             display: none;
-            background: white;
-            border-radius: 30px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
-            animation: fadeIn 0.6s ease;
+            background: #fff;
+            border: 8px solid #000;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 
+                0 0 0 4px #fff,
+                0 0 0 8px #000,
+                8px 8px 0 8px rgba(0,0,0,0.3),
+                inset 0 0 30px rgba(255,215,0,0.1);
+            animation: comicZoom 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+        }
+
+        .screen::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #FFD700 0%, #FFA500 50%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+
+        @keyframes comicZoom {
+            0% { 
+                transform: scale(0) rotate(-10deg); 
+                opacity: 0;
+            }
+            70% {
+                transform: scale(1.1) rotate(2deg);
+            }
+            100% { 
+                transform: scale(1) rotate(0deg); 
+                opacity: 1;
+            }
         }
 
         .screen.active {
@@ -54,19 +96,112 @@
         }
 
         h1 {
-            color: var(--color-accent);
+            color: #FF1493;
             text-align: center;
-            font-size: 2.5em;
+            font-size: 3em;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 
+                3px 3px 0 #000,
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                4px 4px 0 rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: titleShake 0.5s ease;
+        }
+
+        @keyframes titleShake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-2deg); }
+            75% { transform: rotate(2deg); }
         }
 
         .story-text {
             font-size: 1.2em;
             line-height: 1.8;
-            color: var(--color-text-primary);
+            color: #000;
             text-align: center;
             margin: 20px 0;
+            background: rgba(255,255,255,0.9);
+            border: 3px dashed #FF69B4;
+            border-radius: 20px;
+            padding: 20px;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(255,105,180,0.2);
+        }
+
+        /* Comic book speech bubble */
+        .speech-bubble {
+            position: relative;
+            background: #fff;
+            border: 3px solid #000;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50px;
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+            border-top-color: #000;
+            border-bottom: 0;
+        }
+
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 53px;
+            width: 0;
+            height: 0;
+            border: 12px solid transparent;
+            border-top-color: #fff;
+            border-bottom: 0;
+        }
+
+        /* Thought bubble */
+        .thought-bubble {
+            position: relative;
+            background: #fff;
+            border: 3px solid #000;
+            border-radius: 50%;
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 350px;
+            text-align: center;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+        }
+
+        .thought-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 40px;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border: 3px solid #000;
+            border-radius: 50%;
+        }
+
+        .thought-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 20px;
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border: 3px solid #000;
+            border-radius: 50%;
         }
 
         .dino-emoji {
@@ -85,90 +220,185 @@
             display: block;
             margin: 30px auto;
             padding: 15px 40px;
-            font-size: 1.3em;
+            font-size: 1.5em;
             font-weight: bold;
-            background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
-            color: white;
-            border: none;
-            border-radius: 50px;
+            background: #FFD700;
+            color: #000;
+            border: 4px solid #000;
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+            transition: all 0.2s ease;
+            box-shadow: 
+                4px 4px 0 #000,
+                inset 2px 2px 0 rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .btn::before {
+            content: '★';
+            position: absolute;
+            left: 10px;
+            animation: starSpin 2s linear infinite;
+        }
+
+        .btn::after {
+            content: '★';
+            position: absolute;
+            right: 10px;
+            animation: starSpin 2s linear infinite reverse;
+        }
+
+        @keyframes starSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
+            transform: translate(-2px, -2px);
+            box-shadow: 
+                6px 6px 0 #000,
+                inset 2px 2px 0 rgba(255,255,255,0.7);
+            background: #FFA500;
         }
 
         .btn:active {
-            transform: translateY(0);
+            transform: translate(2px, 2px);
+            box-shadow: 
+                2px 2px 0 #000,
+                inset 2px 2px 0 rgba(255,255,255,0.3);
         }
 
-        /* Puzzle Styles */
+        /* Puzzle Styles - 3x3 Grid with Comic Effect */
         .puzzle-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 8px;
             max-width: 450px;
             margin: 30px auto;
-            background: #f0f0f0;
+            background: #fff;
             padding: 15px;
-            border-radius: 20px;
+            border: 6px solid #000;
+            border-radius: 10px;
+            box-shadow: 
+                0 0 0 3px #FFD700,
+                0 0 0 6px #000,
+                8px 8px 0 6px rgba(0,0,0,0.3);
+            transform: rotate(-1deg);
         }
 
         .puzzle-piece {
             aspect-ratio: 1;
-            background: white;
-            border: 3px dashed #ccc;
-            border-radius: 10px;
+            background: #fff;
+            border: 4px solid #000;
             cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2em;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            background-size: 300% 300%;
+            background-image: url('https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/4fac3e96-c834-4c6f-80fd-9992dc7d25d9');
+            border-radius: 5px;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
         }
 
         .puzzle-piece:hover {
-            transform: scale(1.05);
-            border-color: var(--color-accent);
+            transform: scale(1.1) rotate(2deg);
+            border-color: #FFD700;
+            z-index: 10;
+            box-shadow: 
+                0 0 20px #FFD700,
+                5px 5px 0 rgba(0,0,0,0.3);
+            animation: puzzleShake 0.3s ease;
         }
 
-        .puzzle-piece.filled {
-            border: 3px solid var(--color-green);
-            background: #e8f8e8;
+        @keyframes puzzleShake {
+            0%, 100% { transform: scale(1.1) rotate(2deg); }
+            25% { transform: scale(1.1) rotate(-2deg); }
+            75% { transform: scale(1.1) rotate(4deg); }
         }
 
-        .pieces-available {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
-            flex-wrap: wrap;
+        /* Position each puzzle piece to show correct part of image - 3x3 */
+        .puzzle-piece[data-position="0"] { background-position: 0% 0%; }
+        .puzzle-piece[data-position="1"] { background-position: 50% 0%; }
+        .puzzle-piece[data-position="2"] { background-position: 100% 0%; }
+        .puzzle-piece[data-position="3"] { background-position: 0% 50%; }
+        .puzzle-piece[data-position="4"] { background-position: 50% 50%; }
+        .puzzle-piece[data-position="5"] { background-position: 100% 50%; }
+        .puzzle-piece[data-position="6"] { background-position: 0% 100%; }
+        .puzzle-piece[data-position="7"] { background-position: 50% 100%; }
+        .puzzle-piece[data-position="8"] { background-position: 100% 100%; }
+
+        .puzzle-piece.correct {
+            border: 4px solid #00FF00;
+            box-shadow: 
+                0 0 20px #00FF00,
+                0 0 40px rgba(0,255,0,0.5),
+                inset 0 0 20px rgba(0,255,0,0.3);
+            animation: correctPulse 1s ease infinite;
         }
 
-        .draggable-piece {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-green) 100%);
-            border-radius: 15px;
-            cursor: move;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2em;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
+        @keyframes correctPulse {
+            0%, 100% { box-shadow: 0 0 20px #00FF00, 0 0 40px rgba(0,255,0,0.5); }
+            50% { box-shadow: 0 0 30px #00FF00, 0 0 60px rgba(0,255,0,0.8); }
         }
 
-        .draggable-piece:hover {
-            transform: scale(1.1);
+        .completed-puzzle {
+            max-width: 450px;
+            margin: 30px auto;
+            border: 8px solid #000;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 
+                0 0 0 4px #FFD700,
+                0 0 0 8px #000,
+                10px 10px 0 8px rgba(0,0,0,0.3),
+                0 0 50px rgba(255,215,0,0.6);
+            animation: revealPuzzle 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
         }
 
-        .draggable-piece.used {
-            opacity: 0.3;
-            pointer-events: none;
+        .completed-puzzle::before {
+            content: '⭐ PERFECT! ⭐';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #FFD700;
+            color: #000;
+            padding: 10px 30px;
+            border: 4px solid #000;
+            border-radius: 10px;
+            font-size: 1.5em;
+            font-weight: bold;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+            animation: bannerDrop 0.6s ease 0.5s both;
+        }
+
+        @keyframes bannerDrop {
+            from { top: -100px; opacity: 0; }
+            to { top: -50px; opacity: 1; }
+        }
+
+        .completed-puzzle img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        @keyframes revealPuzzle {
+            0% { 
+                transform: scale(0) rotate(-180deg); 
+                opacity: 0;
+            }
+            60% {
+                transform: scale(1.2) rotate(10deg);
+            }
+            100% { 
+                transform: scale(1) rotate(0deg); 
+                opacity: 1;
+            }
         }
 
         /* Valentine Question Screen */
@@ -295,12 +525,96 @@
             line-height: 1.6;
         }
 
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* Comic panel frame effect */
+        .comic-panel {
+            background: #fff;
+            border: 6px solid #000;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 500px;
+            box-shadow: 
+                inset 0 0 0 3px #fff,
+                5px 5px 0 rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .comic-panel::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border: 3px solid rgba(255,215,0,0.5);
+            border-radius: 10px;
+            pointer-events: none;
+        }
+
+        /* Action words effect */
+        .action-word {
+            display: inline-block;
+            font-size: 3em;
+            font-weight: bold;
+            color: #FF0000;
+            text-shadow: 
+                3px 3px 0 #000,
+                -1px -1px 0 #FFD700,
+                1px -1px 0 #FFD700,
+                -1px 1px 0 #FFD700,
+                1px 1px 0 #FFD700;
+            animation: actionPop 0.5s ease infinite alternate;
+            transform: rotate(-5deg);
+            letter-spacing: 3px;
+        }
+
+        @keyframes actionPop {
+            from { transform: rotate(-5deg) scale(1); }
+            to { transform: rotate(5deg) scale(1.1); }
+        }
+
+        /* Speed lines effect */
+        .speed-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, transparent 0%, transparent 48%, #000 49%, #000 51%, transparent 52%, transparent 100%),
+                linear-gradient(90deg, transparent 0%, transparent 73%, #000 74%, #000 76%, transparent 77%, transparent 100%),
+                linear-gradient(90deg, transparent 0%, transparent 23%, #000 24%, #000 26%, transparent 27%, transparent 100%);
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        /* Halftone dot pattern */
+        .halftone {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle, #000 1px, transparent 1px);
+            background-size: 8px 8px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
         @media (max-width: 600px) {
-            h1 { font-size: 1.8em; }
+            h1 { font-size: 2em; }
             .story-text { font-size: 1em; }
             .btn { font-size: 1.1em; padding: 12px 30px; }
-            .puzzle-container { max-width: 300px; }
-            .big-question { font-size: 2em; }
+            .puzzle-container { max-width: 320px; }
+            .big-question { font-size: 1.8em; }
+            .speech-bubble { max-width: 90%; }
+            .thought-bubble { max-width: 90%; }
         }
     </style>
 </head>
@@ -308,101 +622,210 @@
     <div class="container">
         <!-- Story Introduction -->
         <div class="screen active" id="screen1">
-            <h1>🦖 A Dino Love Story 💙</h1>
-            <div class="dino-emoji">🦖💚</div>
-            <div class="story-text">
-                Once upon a time in the prehistoric land of Dinovia, there lived a brave green T-Rex named Rex...
-                <br><br>
-                He had the strongest roar, the mightiest tail, but his heart was soft and gentle.
+            <div class="halftone"></div>
+            <h1>🌲 A Day in Dino Forest 🌲</h1>
+            <div class="comic-panel">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/96dc3a2e-7a9b-4cdb-9cb3-10ef3c50f8dd" alt="Rocky in the forest" style="width: 100%; height: auto; border-radius: 10px; border: 3px solid #000;">
             </div>
-            <button class="btn" onclick="nextScreen(2)">Continue →</button>
+            <div class="speech-bubble">
+                <strong style="color: #228B22;">Meet Rocky!</strong> He's a friendly green T-Rex 🦖
+                <br><br>
+                He loves exploring the forest and collecting cool rocks 🪨
+            </div>
+            <div style="display: flex; justify-content: center; gap: 40px; margin: 30px 0; align-items: flex-end; display: none;">
+                <div class="dino-character" style="background: linear-gradient(135deg, #228B22 0%, #32CD32 100%); width: 180px; height: 200px; border-radius: 60% 60% 50% 50%; position: relative; box-shadow: 0 10px 30px rgba(34,139,34,0.4);">
+                    <div style="position: absolute; top: 20px; left: 30px; width: 25px; height: 25px; background: white; border-radius: 50%; box-shadow: inset -5px -5px 10px rgba(0,0,0,0.2);"><div style="position: absolute; top: 8px; left: 8px; width: 12px; height: 12px; background: #000; border-radius: 50%;"></div></div>
+                    <div style="position: absolute; top: 20px; right: 30px; width: 25px; height: 25px; background: white; border-radius: 50%; box-shadow: inset -5px -5px 10px rgba(0,0,0,0.2);"><div style="position: absolute; top: 8px; left: 8px; width: 12px; height: 12px; background: #000; border-radius: 50%;"></div></div>
+                    <div style="position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); width: 60px; height: 30px; background: #FFE5CC; border-radius: 50%;"></div>
+                    <div style="position: absolute; top: -20px; left: 10px; width: 40px; height: 40px; background: #228B22; border-radius: 50%; box-shadow: 0 5px 15px rgba(0,0,0,0.2);"></div>
+                    <div style="position: absolute; top: -20px; right: 10px; width: 40px; height: 40px; background: #228B22; border-radius: 50%; box-shadow: 0 5px 15px rgba(0,0,0,0.2);"></div>
+                </div>
+            </div>
+            <div class="story-text">
+                Meet Rocky! He's a friendly green T-Rex 🦖
+                <br><br>
+                He loves exploring the forest and collecting cool rocks 🪨
+            </div>
+            <button class="btn" onclick="nextScreen(2)">Next →</button>
         </div>
 
         <!-- Story Part 2 -->
         <div class="screen" id="screen2">
-            <h1>🦕 The Blue Beauty 💙</h1>
-            <div class="dino-emoji">🦕💙</div>
-            <div class="story-text">
-                One day, Rex saw the most beautiful sauropod with a long graceful neck and a cute pink bow on her ear...
-                <br><br>
-                Her name was Sadie, and she had the kindest eyes and the sweetest smile.
-                <br><br>
-                Rex's heart skipped a beat! 💓
+            <div class="halftone"></div>
+            <h1>✨ Someone Special ✨</h1>
+            <div class="comic-panel">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/5b45da4f-f00e-480f-84a7-e39f6e9c948b" alt="Simmie by the lake" style="width: 100%; height: auto; border-radius: 10px; border: 3px solid #000;">
             </div>
-            <button class="btn" onclick="nextScreen(3)">Continue →</button>
+            <div class="speech-bubble">
+                One day, Rocky notices someone sitting by the lake 🌊
+                <br><br>
+                <strong style="color: #4682B4;">It's Simmie!</strong> She's reading a book about stars ✨
+            </div>
+            <div class="thought-bubble">
+                Rocky wonders if he should say hi... 🤔
+            </div>
+            <div style="display: flex; justify-content: center; gap: 40px; margin: 30px 0; align-items: flex-end; display: none;">
+                <div class="dino-character" style="background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%); width: 140px; height: 220px; border-radius: 50% 50% 60% 60%; position: relative; box-shadow: 0 10px 30px rgba(70,130,180,0.4);">
+                    <div style="position: absolute; top: 30px; left: 30px; width: 22px; height: 22px; background: white; border-radius: 50%; box-shadow: inset -3px -3px 8px rgba(0,0,0,0.15);"><div style="position: absolute; top: 6px; left: 6px; width: 10px; height: 10px; background: #000; border-radius: 50%;"></div></div>
+                    <div style="position: absolute; top: 30px; right: 30px; width: 22px; height: 22px; background: white; border-radius: 50%; box-shadow: inset -3px -3px 8px rgba(0,0,0,0.15);"><div style="position: absolute; top: 6px; left: 6px; width: 10px; height: 10px; background: #000; border-radius: 50%;"></div></div>
+                    <div style="position: absolute; top: 10px; right: 20px; width: 35px; height: 30px; background: #FFB6C1; border-radius: 50% 50% 0 0; transform: rotate(15deg);"><div style="position: absolute; width: 35px; height: 30px; background: #FFB6C1; border-radius: 50% 50% 0 0; transform: rotate(-30deg);"></div><div style="position: absolute; top: 10px; left: 10px; width: 15px; height: 15px; background: #FF69B4; border-radius: 50%;"></div></div>
+                    <div style="position: absolute; bottom: 70px; left: 50%; transform: translateX(-50%); width: 50px; height: 25px; background: #F0E68C; border-radius: 50%;"></div>
+                    <div style="position: absolute; top: 15px; left: 5px; width: 35px; height: 35px; background: #87CEEB; border-radius: 50%; box-shadow: 0 3px 10px rgba(0,0,0,0.2);"></div>
+                    <div style="position: absolute; top: 15px; right: 5px; width: 35px; height: 35px; background: #87CEEB; border-radius: 50%; box-shadow: 0 3px 10px rgba(0,0,0,0.2);"></div>
+                </div>
+            </div>
+            <div class="story-text">
+                One day, Rocky notices someone sitting by the lake 🌊
+                <br><br>
+                It's Simmie! She's reading a book about stars ✨
+                <br><br>
+                Rocky wonders if he should say hi... 🤔
+            </div>
+            <button class="btn" onclick="nextScreen(3)">Next →</button>
         </div>
 
         <!-- Story Part 3 -->
         <div class="screen" id="screen3">
-            <h1>😊 Too Shy to Say Hi 😳</h1>
-            <div class="dino-emoji">🦖💭🦕</div>
-            <div class="story-text">
-                Every day, Rex would see Sadie near the fern forest...
-                <br><br>
-                He wanted to talk to her SO badly, but whenever he got close, his words got stuck in his throat!
-                <br><br>
-                Sadie noticed the handsome green T-Rex too, but she was too shy to say anything... 🥺
+            <div class="halftone"></div>
+            <h1>💭 Getting to Know Each Other 💭</h1>
+            <div class="comic-panel">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/5a28e1cb-5af0-4f65-9e1c-46614745dd16" alt="Rocky and Simmie together" style="width: 100%; height: auto; border-radius: 10px; border: 3px solid #000;">
             </div>
-            <button class="btn" onclick="nextScreen(4)">Continue →</button>
+            <div class="speech-bubble">
+                They start talking and find out they both love nature! 🌿
+                <br><br>
+                Simmie shows Rocky her favorite flower spot 🌸
+                <br><br>
+                Rocky shows Simmie his cool rock collection 🪨
+            </div>
+            <div style="text-align: center; margin: 20px 0;">
+                <span class="action-word">FRIENDS!</span>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 60px; margin: 30px 0; align-items: flex-end; display: none;">
+                <div class="dino-character" style="background: linear-gradient(135deg, #228B22 0%, #32CD32 100%); width: 160px; height: 180px; border-radius: 60% 60% 50% 50%; position: relative; transform: rotate(-5deg); box-shadow: 0 10px 30px rgba(34,139,34,0.4);">
+                    <div style="position: absolute; top: 20px; left: 25px; width: 23px; height: 23px; background: white; border-radius: 50%;"><div style="position: absolute; top: 7px; right: 5px; width: 11px; height: 11px; background: #000; border-radius: 50%;"></div></div>
+                    <div style="position: absolute; top: 20px; right: 25px; width: 23px; height: 23px; background: white; border-radius: 50%;"><div style="position: absolute; top: 7px; right: 5px; width: 11px; height: 11px; background: #000; border-radius: 50%;"></div></div>
+                    <div style="position: absolute; top: 50px; left: 50%; transform: translateX(-50%); width: 40px; height: 5px; background: #FF69B4; border-radius: 50%;"></div>
+                    <div style="position: absolute; top: -15px; left: 10px; width: 35px; height: 35px; background: #228B22; border-radius: 50%;"></div>
+                    <div style="position: absolute; top: -15px; right: 10px; width: 35px; height: 35px; background: #228B22; border-radius: 50%;"></div>
+                </div>
+                <div class="dino-character" style="background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%); width: 130px; height: 200px; border-radius: 50% 50% 60% 60%; position: relative; transform: rotate(5deg); box-shadow: 0 10px 30px rgba(70,130,180,0.4);">
+                    <div style="position: absolute; top: 28px; left: 28px; width: 20px; height: 20px; background: white; border-radius: 50%;"><div style="position: absolute; top: 5px; left: 6px; width: 9px; height: 9px; background: #000; border-radius: 50%;"></div></div>
+                    <div style="position: absolute; top: 28px; right: 28px; width: 20px; height: 20px; background: white; border-radius: 50%;"><div style="position: absolute; top: 5px; left: 6px; width: 9px; height: 9px; background: #000; border-radius: 50%;"></div></div>
+                    <div style="position: absolute; top: 10px; right: 18px; width: 32px; height: 28px; background: #FFB6C1; border-radius: 50% 50% 0 0; transform: rotate(15deg);"><div style="position: absolute; width: 32px; height: 28px; background: #FFB6C1; border-radius: 50% 50% 0 0; transform: rotate(-30deg);"></div><div style="position: absolute; top: 8px; left: 8px; width: 14px; height: 14px; background: #FF69B4; border-radius: 50%;"></div></div>
+                    <div style="position: absolute; top: 55px; left: 50%; transform: translateX(-50%); width: 35px; height: 5px; background: #FFB6C1; border-radius: 50%;"></div>
+                    <div style="position: absolute; top: 15px; left: 5px; width: 30px; height: 30px; background: #87CEEB; border-radius: 50%;"></div>
+                    <div style="position: absolute; top: 15px; right: 5px; width: 30px; height: 30px; background: #87CEEB; border-radius: 50%;"></div>
+                </div>
+            </div>
+            <div class="story-text">
+                They start talking and find out they both love nature! 🌿
+                <br><br>
+                Simmie shows Rocky her favorite flower spot 🌸
+                <br><br>
+                Rocky shows Simmie his cool rock collection 🪨
+                <br><br>
+                They're becoming good friends! 😊
+            </div>
+            <button class="btn" onclick="nextScreen(4)">Next →</button>
         </div>
 
         <!-- Story Part 4 -->
         <div class="screen" id="screen4">
-            <h1>💡 A Special Plan 💝</h1>
-            <div class="dino-emoji">🦖✨</div>
-            <div class="story-text">
-                With Valentine's Day approaching, Rex decided he MUST tell Sadie how he feels!
-                <br><br>
-                He created a special puzzle just for her... a picture of them together! 
-                <br><br>
-                But he needs YOUR help to complete it! 🎯
+            <div class="halftone"></div>
+            <h1>🎨 A Creative Idea 🎨</h1>
+            <div class="comic-panel">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/e5aa82c6-a8e9-4c32-88b8-e7f3b7b05d6d" alt="Rocky thinking" style="width: 100%; height: auto; border-radius: 10px; border: 3px solid #000;">
             </div>
-            <button class="btn" onclick="nextScreen(5)">Help Rex! 💪</button>
+            <div class="thought-bubble">
+                Valentine's Day is coming up soon! 💝
+                <br><br>
+                Rocky wants to do something special for his friend Simmie
+                <br><br>
+                He's making a surprise puzzle! But it's all mixed up... 🧩
+            </div>
+            <div class="speech-bubble">
+                <strong>Can you help Rocky put it together? 🤔</strong>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 40px; margin: 20px 0; align-items: center; display: none;">
+                <div class="dino-character" style="background: linear-gradient(135deg, #228B22 0%, #32CD32 100%); width: 140px; height: 160px; border-radius: 60% 60% 50% 50%; position: relative; box-shadow: 0 10px 30px rgba(34,139,34,0.4);">
+                    <div style="position: absolute; top: 18px; left: 22px; width: 22px; height: 22px; background: white; border-radius: 50%;"><div style="position: absolute; top: 7px; left: 7px; width: 10px; height: 10px; background: #000; border-radius: 50%;"></div></div>
+                    <div style="position: absolute; top: 18px; right: 22px; width: 22px; height: 22px; background: white; border-radius: 50%;"><div style="position: absolute; top: 7px; left: 7px; width: 10px; height: 10px; background: #000; border-radius: 50%;"></div></div>
+                    <div style="position: absolute; bottom: 45px; left: 50%; transform: translateX(-50%); width: 50px; height: 25px; background: #FFE5CC; border-radius: 50%;"></div>
+                    <div style="position: absolute; top: -12px; left: 8px; width: 32px; height: 32px; background: #228B22; border-radius: 50%;"></div>
+                    <div style="position: absolute; top: -12px; right: 8px; width: 32px; height: 32px; background: #228B22; border-radius: 50%;"></div>
+                </div>
+                <div style="font-size: 4em; animation: pulse 2s infinite;">💭</div>
+            </div>
+            <div class="story-text">
+                Valentine's Day is coming up soon! 💝
+                <br><br>
+                Rocky wants to do something special for his friend Simmie
+                <br><br>
+                He's making a surprise puzzle! But it's all mixed up... 🧩
+                <br><br>
+                Can you help Rocky put it together? 🤔
+            </div>
+            <button class="btn" onclick="nextScreen(5)">Let's Help! 💪</button>
         </div>
 
         <!-- Puzzle Game -->
         <div class="screen" id="screen5">
-            <h1>🧩 Complete the Heart Puzzle!</h1>
-            <div class="story-text" style="font-size: 1em;">
-                Drag the heart pieces into the empty spaces to reveal Rex and Sadie's special moment! 💕
+            <div class="speed-lines"></div>
+            <h1>🧩 Solve the Puzzle!</h1>
+            <div class="speech-bubble" style="max-width: 500px;">
+                <strong>Click on two pieces to swap them and complete the picture! 💕</strong>
+                <br>
+                <small>(Tip: Look at the pieces and try to put them in order!)</small>
             </div>
             
-            <div class="puzzle-container" id="puzzleGrid">
-                <div class="puzzle-piece" data-index="0"></div>
-                <div class="puzzle-piece" data-index="1"></div>
-                <div class="puzzle-piece" data-index="2"></div>
-                <div class="puzzle-piece" data-index="3"></div>
-                <div class="puzzle-piece" data-index="4"></div>
-                <div class="puzzle-piece" data-index="5"></div>
-                <div class="puzzle-piece" data-index="6"></div>
-                <div class="puzzle-piece" data-index="7"></div>
-                <div class="puzzle-piece" data-index="8"></div>
-            </div>
-
-            <div class="pieces-available" id="piecesContainer">
-                <div class="draggable-piece" draggable="true" data-piece="0">💚</div>
-                <div class="draggable-piece" draggable="true" data-piece="1">💙</div>
-                <div class="draggable-piece" draggable="true" data-piece="2">💕</div>
-                <div class="draggable-piece" draggable="true" data-piece="3">🦖</div>
-                <div class="draggable-piece" draggable="true" data-piece="4">❤️</div>
-                <div class="draggable-piece" draggable="true" data-piece="5">🦕</div>
-                <div class="draggable-piece" draggable="true" data-piece="6">💝</div>
-                <div class="draggable-piece" draggable="true" data-piece="7">🎀</div>
-                <div class="draggable-piece" draggable="true" data-piece="8">✨</div>
+            <div class="puzzle-container" id="puzzleGrid"></div>
+            <div id="completedImage" class="completed-puzzle" style="display: none;">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/4fac3e96-c834-4c6f-80fd-9992dc7d25d9" alt="Rocky and Simmie together">
             </div>
         </div>
 
         <!-- The Big Question -->
         <div class="screen" id="screen6">
+            <div class="halftone"></div>
             <div class="floating-dinos" id="floatingDinos"></div>
             <div class="question-box">
-                <h1>💝 The Moment of Truth 💝</h1>
-                <div class="dino-emoji">🦖💚💙🦕</div>
-                <div class="story-text">
-                    With trembling tiny arms and a racing heart, Rex finally found his courage...
+                <h1>💝 A Sweet Surprise 💝</h1>
+                <div class="comic-panel">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/4fac3e96-c834-4c6f-80fd-9992dc7d25d9" alt="Rocky and Simmie together" style="width: 100%; height: auto; border-radius: 10px; border: 3px solid #000;">
                 </div>
-                <div class="big-question">
-                    Will you be my Valentine? 💕
+                <div class="speech-bubble">
+                    Rocky really enjoys spending time with Simmie 🌟
+                    <br><br>
+                    She makes him smile and laugh every day 😊
+                </div>
+                <div class="thought-bubble">
+                    He's been thinking... maybe they could be more than just friends? 💭
+                </div>
+                <div style="display: flex; justify-content: center; align-items: flex-end; gap: 50px; margin: 30px 0; display: none;">
+                    <div class="dino-character" style="background: linear-gradient(135deg, #228B22 0%, #32CD32 100%); width: 150px; height: 170px; border-radius: 60% 60% 50% 50%; position: relative; box-shadow: 0 10px 30px rgba(34,139,34,0.4); animation: bounce 2s infinite;">
+                        <div style="position: absolute; top: 18px; left: 25px; width: 24px; height: 24px; background: white; border-radius: 50%;"><div style="position: absolute; top: 8px; left: 8px; width: 11px; height: 11px; background: #000; border-radius: 50%;"></div></div>
+                        <div style="position: absolute; top: 18px; right: 25px; width: 24px; height: 24px; background: white; border-radius: 50%;"><div style="position: absolute; top: 8px; left: 8px; width: 11px; height: 11px; background: #000; border-radius: 50%;"></div></div>
+                        <div style="position: absolute; top: 8px; left: 40%; width: 18px; height: 18px; background: #FFB6C1; border-radius: 50%;"></div>
+                        <div style="position: absolute; top: 8px; right: 40%; width: 18px; height: 18px; background: #FFB6C1; border-radius: 50%;"></div>
+                        <div style="position: absolute; bottom: 48px; left: 50%; transform: translateX(-50%); width: 55px; height: 28px; background: #FFE5CC; border-radius: 50%;"></div>
+                        <div style="position: absolute; top: -14px; left: 10px; width: 34px; height: 34px; background: #228B22; border-radius: 50%;"></div>
+                        <div style="position: absolute; top: -14px; right: 10px; width: 34px; height: 34px; background: #228B22; border-radius: 50%;"></div>
+                    </div>
+                    <span style="font-size: 4em;">💕</span>
+                    <div class="dino-character" style="background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%); width: 135px; height: 210px; border-radius: 50% 50% 60% 60%; position: relative; box-shadow: 0 10px 30px rgba(70,130,180,0.4); animation: bounce 2s infinite;">
+                        <div style="position: absolute; top: 30px; left: 28px; width: 21px; height: 21px; background: white; border-radius: 50%;"><div style="position: absolute; top: 6px; left: 6px; width: 10px; height: 10px; background: #000; border-radius: 50%;"></div></div>
+                        <div style="position: absolute; top: 30px; right: 28px; width: 21px; height: 21px; background: white; border-radius: 50%;"><div style="position: absolute; top: 6px; left: 6px; width: 10px; height: 10px; background: #000; border-radius: 50%;"></div></div>
+                        <div style="position: absolute; top: 10px; right: 18px; width: 34px; height: 29px; background: #FFB6C1; border-radius: 50% 50% 0 0; transform: rotate(15deg);"><div style="position: absolute; width: 34px; height: 29px; background: #FFB6C1; border-radius: 50% 50% 0 0; transform: rotate(-30deg);"></div><div style="position: absolute; top: 9px; left: 9px; width: 15px; height: 15px; background: #FF69B4; border-radius: 50%;"></div></div>
+                        <div style="position: absolute; top: 12px; left: 45%; width: 20px; height: 20px; background: #FFB6C1; border-radius: 50%;"></div>
+                        <div style="position: absolute; top: 12px; right: 45%; width: 20px; height: 20px; background: #FFB6C1; border-radius: 50%;"></div>
+                        <div style="position: absolute; bottom: 68px; left: 50%; transform: translateX(-50%); width: 48px; height: 26px; background: #F0E68C; border-radius: 50%;"></div>
+                        <div style="position: absolute; top: 15px; left: 5px; width: 32px; height: 32px; background: #87CEEB; border-radius: 50%;"></div>
+                        <div style="position: absolute; top: 15px; right: 5px; width: 32px; height: 32px; background: #87CEEB; border-radius: 50%;"></div>
+                    </div>
+                </div>
+                <div class="big-question" style="background: #FFD700; border: 5px solid #000; border-radius: 20px; padding: 20px; box-shadow: 5px 5px 0 rgba(0,0,0,0.3); margin: 30px 0;">
+                    <span class="action-word" style="font-size: 2em; color: #FF1493;">💕 Will you be my Valentine? 💕</span>
                 </div>
                 <div class="button-container">
                     <button class="btn" id="yesBtn" onclick="sayYes()">YES! 💚</button>
@@ -413,25 +836,29 @@
 
         <!-- Celebration -->
         <div class="screen" id="screen7">
+            <div class="halftone"></div>
             <div class="hearts-rain" id="heartsRain"></div>
             <div class="celebration">
-                <h1>🎉 SHE SAID YES! 🎉</h1>
+                <h1>🎉 She Said YES! 🎉</h1>
+                <div style="text-align: center; margin: 20px 0;">
+                    <span class="action-word" style="font-size: 4em; color: #00FF00;">SUCCESS!</span>
+                </div>
                 <div class="flower-bouquet">💐🌹🌷🌺🌸💐</div>
-                <div class="dino-emoji">🦖❤️🦕</div>
-                <div class="love-message">
-                    Rex's heart exploded with joy! 
+                <div class="comic-panel" style="max-width: 500px;">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/4fac3e96-c834-4c6f-80fd-9992dc7d25d9" alt="Rocky and Simmie together" style="width: 100%; height: auto; border-radius: 10px; border: 3px solid #000;">
+                </div>
+                <div class="love-message" style="background: rgba(255,255,255,0.9); border: 4px solid #FF69B4; border-radius: 20px; padding: 20px; margin: 20px auto; max-width: 500px; box-shadow: 4px 4px 0 rgba(0,0,0,0.2);">
+                    Rocky is so happy! 😊
                     <br><br>
-                    He gave Sadie the most beautiful bouquet of prehistoric flowers...
+                    He gives Simmie beautiful flowers from the forest 🌹
                     <br><br>
-                    They danced under the stars, finally together! 
+                    Now they're best friends and spend time together! 💚💙
                     <br><br>
-                    💚 From that day on, they were inseparable... 💙
-                    <br><br>
-                    🦖💕🦕
+                    They explore the forest, find pretty flowers, and have lots of fun! 🌳✨
                     <br><br>
                     <strong>THE END</strong>
                     <br>
-                    <em>(or should we say... THE BEGINNING! 💝)</em>
+                    <em>(This is just the beginning of their friendship! 💝)</em>
                 </div>
                 <div class="flower-bouquet">🌟✨💖✨🌟</div>
                 <button class="btn" onclick="location.reload()">Play Again 🔄</button>
@@ -442,7 +869,8 @@
     <script>
         let currentScreen = 1;
         let puzzleCompleted = false;
-        let filledPieces = 0;
+        let selectedPiece = null;
+        let puzzleOrder = [];
 
         function nextScreen(screenNum) {
             document.getElementById(`screen${currentScreen}`).classList.remove('active');
@@ -456,60 +884,93 @@
             }
         }
 
-        // Puzzle Game Logic
+        // Puzzle Game Logic - 3x3 Click to Swap
         function initPuzzle() {
-            const pieces = document.querySelectorAll('.draggable-piece');
-            const slots = document.querySelectorAll('.puzzle-piece');
-
-            pieces.forEach(piece => {
-                piece.addEventListener('dragstart', dragStart);
-                piece.addEventListener('dragend', dragEnd);
-            });
-
-            slots.forEach(slot => {
-                slot.addEventListener('dragover', dragOver);
-                slot.addEventListener('drop', drop);
-            });
-        }
-
-        let draggedElement = null;
-
-        function dragStart(e) {
-            draggedElement = e.target;
-            e.target.style.opacity = '0.5';
-        }
-
-        function dragEnd(e) {
-            e.target.style.opacity = '1';
-        }
-
-        function dragOver(e) {
-            e.preventDefault();
-        }
-
-        function drop(e) {
-            e.preventDefault();
-            const slot = e.currentTarget;
+            const container = document.getElementById('puzzleGrid');
+            container.innerHTML = '';
             
-            if (!slot.classList.contains('filled') && draggedElement) {
-                slot.textContent = draggedElement.textContent;
-                slot.classList.add('filled');
-                draggedElement.classList.add('used');
-                filledPieces++;
+            // Create shuffled array [0,1,2,3,4,5,6,7,8]
+            puzzleOrder = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+            
+            // Shuffle the pieces
+            for (let i = puzzleOrder.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [puzzleOrder[i], puzzleOrder[j]] = [puzzleOrder[j], puzzleOrder[i]];
+            }
+            
+            // Create puzzle pieces
+            for (let i = 0; i < 9; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'puzzle-piece';
+                piece.setAttribute('data-position', puzzleOrder[i]);
+                piece.setAttribute('data-index', i);
+                piece.addEventListener('click', () => selectPiece(i));
+                container.appendChild(piece);
+            }
+        }
 
-                if (filledPieces === 9) {
-                    setTimeout(() => {
-                        puzzleCompleted = true;
-                        celebratePuzzle();
-                    }, 500);
+        function selectPiece(index) {
+            const pieces = document.querySelectorAll('.puzzle-piece');
+            
+            if (selectedPiece === null) {
+                // First piece selected
+                selectedPiece = index;
+                pieces[index].style.border = '3px solid #FF1493';
+                pieces[index].style.transform = 'scale(0.95)';
+            } else if (selectedPiece === index) {
+                // Deselect if clicked again
+                pieces[index].style.border = '3px solid #ddd';
+                pieces[index].style.transform = 'scale(1)';
+                selectedPiece = null;
+            } else {
+                // Second piece selected - swap them
+                pieces[selectedPiece].style.border = '3px solid #ddd';
+                pieces[selectedPiece].style.transform = 'scale(1)';
+                
+                // Swap the positions
+                [puzzleOrder[selectedPiece], puzzleOrder[index]] = [puzzleOrder[index], puzzleOrder[selectedPiece]];
+                
+                // Update the pieces
+                pieces[selectedPiece].setAttribute('data-position', puzzleOrder[selectedPiece]);
+                pieces[index].setAttribute('data-position', puzzleOrder[index]);
+                
+                selectedPiece = null;
+                
+                // Check if puzzle is complete
+                checkPuzzleComplete();
+            }
+        }
+
+        function checkPuzzleComplete() {
+            let isComplete = true;
+            for (let i = 0; i < 9; i++) {
+                if (puzzleOrder[i] !== i) {
+                    isComplete = false;
+                    break;
                 }
+            }
+            
+            if (isComplete) {
+                setTimeout(() => {
+                    celebratePuzzle();
+                }, 500);
             }
         }
 
         function celebratePuzzle() {
-            alert('🎉 Puzzle Complete! The picture is beautiful! 💕');
+            const pieces = document.querySelectorAll('.puzzle-piece');
+            pieces.forEach(piece => piece.classList.add('correct'));
+            
             setTimeout(() => {
-                nextScreen(6);
+                document.getElementById('puzzleGrid').style.display = 'none';
+                document.getElementById('completedImage').style.display = 'block';
+                
+                setTimeout(() => {
+                    alert('🎉 Amazing! You did it! Rocky and Simmie look so happy together! 💕');
+                    setTimeout(() => {
+                        nextScreen(6);
+                    }, 1000);
+                }, 1000);
             }, 1000);
         }
 
