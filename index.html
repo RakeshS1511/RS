@@ -1,481 +1,631 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Rocky & Simmie – Maybe It’s Love</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    :root {
-      --pink: #ff9ac8;
-      --dark-pink: #ff4f9a;
-      --forest1: #8fbc8f;
-      --forest2: #228b22;
-      --forest3: #2f4f2f;
-      --text-main: #263238;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦖💙 A Dino Love Story 🦕💚</title>
+    <style>
+        :root {
+            --color-bg-primary: #FFF0F5;
+            --color-text-primary: #2C3E50;
+            --color-accent: #FF69B4;
+            --color-green: #7CFC00;
+            --color-blue: #87CEEB;
+        }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: "Comic Sans MS", "Arial Rounded MT Bold", system-ui, -apple-system,
-        BlinkMacSystemFont, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.3), transparent 60%),
-                  radial-gradient(circle at 80% 80%, rgba(255,255,255,0.2), transparent 60%),
-                  linear-gradient(135deg, var(--forest1), var(--forest2), var(--forest3));
-      color: var(--text-main);
-    }
+        body {
+            font-family: 'Quicksand', 'Nunito', 'Poppins', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #8FBC8F 0%, #228B22 50%, #2F4F2F 100%);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(34, 139, 34, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(47, 79, 47, 0.3) 0%, transparent 50%),
+                linear-gradient(135deg, #8FBC8F 0%, #228B22 50%, #2F4F2F 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
 
-    .storybook {
-      width: 95%;
-      max-width: 880px;
-      background: #ffffff;
-      border-radius: 30px;
-      padding: 32px 22px 26px;
-      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.35);
-      position: relative;
-      overflow: hidden;
-    }
+        .container {
+            max-width: 800px;
+            width: 95%;
+            padding: 20px;
+        }
 
-    .header {
-      text-align: center;
-      margin-bottom: 6px;
-    }
+        .screen {
+            display: none;
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
+            animation: fadeIn 0.6s ease;
+        }
 
-    .header h1 {
-      font-size: 2rem;
-      color: var(--dark-pink);
-      text-shadow: 0 2px 4px rgba(0,0,0,0.12);
-    }
+        .screen.active {
+            display: block;
+        }
 
-    .header p {
-      margin-top: 6px;
-      font-size: 0.95rem;
-      color: #607078;
-    }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    .screen {
-      display: none;
-      animation: fadeIn 0.6s ease;
-    }
+        h1 {
+            color: var(--color-accent);
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
 
-    .screen.active {
-      display: block;
-    }
+        .story-text {
+            font-size: 1.4em;
+            line-height: 2;
+            color: var(--color-text-primary);
+            text-align: center;
+            margin: 20px 0;
+            font-weight: 500;
+        }
 
-    .screen-inner {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      gap: 24px;
-      align-items: center;
-      padding: 10px 6px 0;
-    }
+        .dino-emoji {
+            font-size: 4em;
+            text-align: center;
+            margin: 20px 0;
+            animation: bounce 2s infinite;
+        }
 
-    .screen-image {
-      position: relative;
-      border-radius: 26px;
-      overflow: hidden;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
-      background: linear-gradient(135deg, #e3f2fd, #fce4ec);
-    }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
 
-    .screen-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
-    }
+        .btn {
+            display: block;
+            margin: 30px auto;
+            padding: 15px 40px;
+            font-size: 1.3em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
 
-    .image-tag {
-      position: absolute;
-      bottom: 10px;
-      right: 14px;
-      background: rgba(0, 0, 0, 0.55);
-      color: #fff;
-      font-size: 0.78rem;
-      padding: 4px 10px;
-      border-radius: 999px;
-      backdrop-filter: blur(4px);
-    }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
+        }
 
-    .text-block {
-      padding-right: 6px;
-    }
+        .btn:active {
+            transform: translateY(0);
+        }
 
-    .text-block h2 {
-      font-size: 1.35rem;
-      margin-bottom: 10px;
-      color: #37474f;
-    }
+        /* Puzzle Styles - 3x3 Grid */
+        .puzzle-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            max-width: 450px;
+            margin: 30px auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
 
-    .text-block p {
-      font-size: 1rem;
-      line-height: 1.7;
-      margin-bottom: 10px;
-    }
+        .puzzle-piece {
+            aspect-ratio: 1;
+            background: #fff;
+            border: 3px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            background-size: 300% 300%;
+            background-image: url('https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/ba820b62-7460-4ab8-9861-757e757655ec');
+            border-radius: 10px;
+        }
 
-    .soft {
-      color: #6c7a80;
-      font-size: 0.95rem;
-    }
+        .puzzle-piece:hover {
+            transform: scale(1.05);
+            border-color: var(--color-accent);
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.5);
+        }
 
-    .highlight {
-      color: var(--dark-pink);
-      font-weight: 600;
-    }
+        /* Position each puzzle piece to show correct part of image - 3x3 */
+        .puzzle-piece[data-position="0"] { background-position: 0% 0%; }
+        .puzzle-piece[data-position="1"] { background-position: 50% 0%; }
+        .puzzle-piece[data-position="2"] { background-position: 100% 0%; }
+        .puzzle-piece[data-position="3"] { background-position: 0% 50%; }
+        .puzzle-piece[data-position="4"] { background-position: 50% 50%; }
+        .puzzle-piece[data-position="5"] { background-position: 100% 50%; }
+        .puzzle-piece[data-position="6"] { background-position: 0% 100%; }
+        .puzzle-piece[data-position="7"] { background-position: 50% 100%; }
+        .puzzle-piece[data-position="8"] { background-position: 100% 100%; }
 
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 20px;
-      padding: 0 4px;
-    }
+        .puzzle-piece.correct {
+            border: 3px solid var(--color-green);
+            box-shadow: 0 0 15px rgba(124, 252, 0, 0.7);
+        }
 
-    .page-dots {
-      display: flex;
-      gap: 6px;
-    }
+        .completed-puzzle {
+            max-width: 450px;
+            margin: 30px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            animation: revealPuzzle 1s ease;
+        }
 
-    .dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: #e0e0e0;
-      transition: all 0.25s ease;
-    }
+        .completed-puzzle img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
 
-    .dot.active {
-      width: 24px;
-      border-radius: 999px;
-      background: var(--dark-pink);
-    }
+        @keyframes revealPuzzle {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
 
-    .btn {
-      border: none;
-      border-radius: 999px;
-      padding: 9px 22px;
-      background: linear-gradient(135deg, var(--pink), var(--dark-pink));
-      color: #fff;
-      font-weight: 600;
-      font-size: 0.98rem;
-      box-shadow: 0 9px 18px rgba(255, 105, 180, 0.45);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-    }
+        /* Valentine Question Screen */
+        .floating-dinos {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 12px 24px rgba(255, 105, 180, 0.6);
-    }
+        .floating-dino {
+            position: absolute;
+            font-size: 3em;
+            animation: float 8s infinite ease-in-out;
+        }
 
-    .btn:active {
-      transform: translateY(0);
-      box-shadow: 0 7px 14px rgba(255, 105, 180, 0.4);
-    }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, -30px) rotate(10deg); }
+            50% { transform: translate(100px, 20px) rotate(-10deg); }
+            75% { transform: translate(50px, 50px) rotate(5deg); }
+        }
 
-    .btn.secondary {
-      background: #eceff1;
-      color: #546e7a;
-      box-shadow: none;
-    }
+        .question-box {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 40px;
+        }
 
-    .btn.secondary:hover {
-      box-shadow: 0 6px 14px rgba(0,0,0,0.18);
-    }
+        .big-question {
+            font-size: 3em;
+            color: #FF1493;
+            margin: 30px 0;
+            animation: pulse 2s infinite;
+        }
 
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
 
-    .subtle {
-      font-size: 0.85rem;
-      color: #78909c;
-    }
+        .button-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+        }
 
-    /* Heart particles on last screen */
-    .heart-layer {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: -1;
-    }
+        #yesBtn {
+            padding: 20px 60px;
+            font-size: 2em;
+            background: linear-gradient(135deg, #00FF00 0%, #32CD32 100%);
+            border: 3px solid #228B22;
+        }
 
-    .heart {
-      position: absolute;
-      font-size: 1.2rem;
-      animation: floatHeart 5s linear infinite;
-      opacity: 0;
-    }
+        #noBtn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            background: linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 100%);
+            color: #666;
+            border: 2px solid #FFB6C1;
+            position: relative;
+            transition: all 0.1s ease;
+        }
 
-    @keyframes floatHeart {
-      0% { transform: translateY(20px) scale(0.8); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: translateY(-140px) scale(1.1); opacity: 0; }
-    }
+        #noBtn:hover {
+            animation: runAway 0.5s ease;
+        }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        @keyframes runAway {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(100px, -50px) rotate(15deg); }
+            50% { transform: translate(-100px, 50px) rotate(-15deg); }
+            75% { transform: translate(80px, -30px) rotate(10deg); }
+            100% { transform: translate(-120px, 40px) rotate(-20deg); }
+        }
 
-    @keyframes glow {
-      0%,100% { box-shadow: 0 0 0 rgba(255,79,154,0); }
-      50% { box-shadow: 0 0 14px rgba(255,79,154,0.8); }
-    }
+        /* Final Screen */
+        .celebration {
+            text-align: center;
+        }
 
-    .soft-glow {
-      animation: glow 2.4s ease-in-out infinite;
-    }
+        .hearts-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
 
-    @media (max-width: 720px) {
-      .screen-inner {
-        grid-template-columns: 1fr;
-        gap: 18px;
-      }
-      .screen-image {
-        max-width: 360px;
-        margin: 0 auto;
-      }
-      .text-block {
-        text-align: center;
-        padding: 0 4px;
-      }
-      .nav {
-        flex-direction: column-reverse;
-        gap: 10px;
-      }
-    }
-  </style>
+        .heart {
+            position: absolute;
+            font-size: 2em;
+            animation: fall 4s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            0% { top: -10%; opacity: 1; }
+            100% { top: 110%; opacity: 0; }
+        }
+
+        .flower-bouquet {
+            font-size: 5em;
+            margin: 30px 0;
+            animation: bouquetAppear 1s ease;
+        }
+
+        @keyframes bouquetAppear {
+            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .love-message {
+            font-size: 1.5em;
+            color: #FF1493;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8em; }
+            .story-text { font-size: 1em; }
+            .btn { font-size: 1.1em; padding: 12px 30px; }
+            .puzzle-container { max-width: 320px; }
+            .pieces-available { max-width: 320px; }
+            .big-question { font-size: 2em; }
+        }
+    </style>
 </head>
 <body>
-  <div class="storybook">
-    <div class="header">
-      <h1>Rocky &amp; Simmie: Maybe It’s Love</h1>
-      <p>A tiny story about two dinos with gently mending hearts.</p>
+    <div class="container">
+        <!-- Screen 1: Meet Simeee -->
+        <div class="screen active" id="screen1">
+            <h1>💙 Meet Simeee 💙</h1>
+            <div style="width: 100%; max-width: 600px; margin: 30px auto; display: flex; justify-content: center; background: linear-gradient(135deg, rgba(135, 206, 235, 0.2) 0%, rgba(255, 192, 203, 0.2) 100%); padding: 20px; border-radius: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.2);">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/e67b3959-ba95-4707-bd03-878ca1b4f7a4" alt="Simeee the adorable dino" style="width: 100%; height: 450px; object-fit: cover; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            </div>
+            <div class="story-text">
+                This is Simeee! She's an adorable and lovable dino 🦕
+                <br><br>
+                She loves spreading joy and making everyone smile! 💕
+            </div>
+            <button class="btn" onclick="nextScreen(2)">Next →</button>
+        </div>
+
+        <!-- Screen 2: Meet Rocky -->
+        <div class="screen" id="screen2">
+            <h1>💚 Meet Rocky 💚</h1>
+            <div style="width: 100%; max-width: 600px; margin: 30px auto; display: flex; justify-content: center; background: linear-gradient(135deg, rgba(124, 252, 0, 0.2) 0%, rgba(34, 139, 34, 0.2) 100%); padding: 20px; border-radius: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.2);">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/58f1a154-b3db-4602-90a0-c3f1b48f390c" alt="Rocky the green T-Rex" style="width: 100%; height: 450px; object-fit: cover; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            </div>
+            <div class="story-text">
+                This is Rocky! He's a friendly green T-Rex 🦖
+                <br><br>
+                He loves exploring the forest and has a crush on Simeee... 💭
+                <br><br>
+                He thinks she's absolutely amazing! 💚
+            </div>
+            <button class="btn" onclick="nextScreen(3)">Next →</button>
+        </div>
+
+        <!-- Screen 3: Rocky Thinking -->
+        <div class="screen" id="screen3">
+            <h1>💭 Rocky's Thoughts 💭</h1>
+            <div style="width: 100%; max-width: 650px; margin: 30px auto; display: flex; justify-content: center; background: linear-gradient(135deg, rgba(255, 105, 180, 0.15) 0%, rgba(255, 182, 193, 0.15) 100%); padding: 20px; border-radius: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.2);">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/5b9d36a0-8701-4b58-aec7-c585bf593f10" alt="Rocky thinking about Simeee" style="width: 100%; height: 450px; object-fit: cover; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            </div>
+            <div class="story-text">
+                Rocky can't stop thinking about Simeee 💚
+                <br><br>
+                They spend time together exploring the forest 🌿
+                <br><br>
+                Valentine's Day is coming... Should he tell Simeee how he feels? 💝
+            </div>
+            <button class="btn" onclick="nextScreen(4)">Next →</button>
+        </div>
+
+        <!-- Screen 4: Puzzle Challenge -->
+        <div class="screen" id="screen4">
+            <h1>🧩 Help Rocky! 🧩</h1>
+            <div class="story-text" style="font-size: 1.1em;">
+                Rocky made a special puzzle for Simeee! 💝
+                <br><br>
+                But it's all mixed up... Can you help him solve it? 🤔
+                <br><br>
+                <strong>Click two pieces to swap them!</strong>
+            </div>
+            <button class="btn" onclick="nextScreen(5)">Start Puzzle! 🎯</button>
+        </div>
+
+        <!-- Puzzle Game -->
+        <div class="screen" id="screen5">
+            <h1>🧩 Solve the Puzzle!</h1>
+            <div class="story-text" style="font-size: 1em;">
+                Click on two pieces to swap them and complete the picture! 💕
+                <br>
+                <small>(Tip: Look at the pieces and try to put them in order!)</small>
+            </div>
+            
+            <div class="puzzle-container" id="puzzleGrid"></div>
+            <div id="completedImage" class="completed-puzzle" style="display: none;">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/ba820b62-7460-4ab8-9861-757e757655ec" alt="Rocky and Simeee heart puzzle">
+            </div>
+        </div>
+
+        <!-- The Big Question -->
+        <div class="screen" id="screen6">
+            <div class="floating-dinos" id="floatingDinos"></div>
+            <div class="question-box">
+                <h1>💝 The Big Question 💝</h1>
+                <div style="width: 100%; max-width: 650px; margin: 30px auto; display: flex; justify-content: center; background: linear-gradient(135deg, rgba(255, 105, 180, 0.15) 0%, rgba(255, 20, 147, 0.15) 100%); padding: 20px; border-radius: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.2);">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/ba820b62-7460-4ab8-9861-757e757655ec" alt="Rocky and Simeee together" style="width: 100%; height: 450px; object-fit: cover; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.3); animation: pulse 2s infinite;">
+                </div>
+                <div class="story-text">
+                    Rocky really enjoys spending time with Simeee 🌟
+                    <br><br>
+                    She makes him smile and laugh every day 😊
+                    <br><br>
+                    He's been thinking... maybe they could be more than just friends? 💭
+                </div>
+                <div class="big-question">
+                    Will you be my Valentine? 💕
+                </div>
+                <div class="button-container">
+                    <button class="btn" id="yesBtn" onclick="sayYes()">YES! 💚</button>
+                    <button class="btn" id="noBtn" onmouseover="moveNoButton(event)">No...</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Celebration -->
+        <div class="screen" id="screen7">
+            <div class="hearts-rain" id="heartsRain"></div>
+            <div class="celebration">
+                <h1>🎉 She Said YES! 🎉</h1>
+                <div class="flower-bouquet">💐🌹🌷🌺🌸💐</div>
+                <div style="width: 100%; max-width: 650px; margin: 30px auto; display: flex; justify-content: center; background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 105, 180, 0.2) 100%); padding: 20px; border-radius: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.2);">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/4f3d186b-5516-4998-828f-c0210d26d1ef" alt="Rocky and Simeee celebrating" style="width: 100%; height: 450px; object-fit: cover; border-radius: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.3); animation: bouquetAppear 1s ease;">
+                </div>
+                <div class="love-message">
+                    Rocky is so happy! 😊
+                    <br><br>
+                    He gives Simeee beautiful flowers from the forest 🌹
+                    <br><br>
+                    Now they're best friends and spend time together! 💚💙
+                    <br><br>
+                    They explore the forest, find pretty flowers, and have lots of fun! 🌳✨
+                    <br><br>
+                    <strong>THE END</strong>
+                    <br>
+                    <em>(This is just the beginning of their friendship! 💝)</em>
+                </div>
+                <div class="flower-bouquet">🌟✨💖✨🌟</div>
+                <button class="btn" onclick="location.reload()">Play Again 🔄</button>
+            </div>
+        </div>
     </div>
 
-    <!-- Screen 1: Two quiet hearts -->
-    <section class="screen active" id="screen1">
-      <div class="screen-inner">
-        <div class="screen-image soft-glow">
-          <!-- Rocky alone in forest – use your Rocky image URL here -->
-          <img src="ROCKY_IMAGE_URL" alt="Rocky in the forest" />
-          <div class="image-tag">Rocky, trying to feel okay again</div>
-        </div>
-        <div class="text-block">
-          <h2>Two quiet hearts</h2>
-          <p>
-            This is <span class="highlight">Rocky</span>. He looks tough, but his heart has a few tiny cracks.
-          </p>
-          <p class="soft">
-            Most days he just walks through the forest, collecting little rocks and trying to breathe a bit easier.
-          </p>
-          <p>
-            Somewhere not too far away, another heart is doing the same thing, in her own gentle way.
-          </p>
-        </div>
-      </div>
-    </section>
+    <script>
+        let currentScreen = 1;
+        let puzzleCompleted = false;
+        let selectedPiece = null;
+        let puzzleOrder = [];
 
-    <!-- Screen 2: When paths cross -->
-    <section class="screen" id="screen2">
-      <div class="screen-inner">
-        <div class="screen-image">
-          <!-- Simmie by the lake – use your Simmie image URL here -->
-          <img src="SIMMIE_IMAGE_URL" alt="Simmie by the lake" />
-          <div class="image-tag">Simmie, blue bow and soft eyes</div>
-        </div>
-        <div class="text-block">
-          <h2>When paths quietly cross</h2>
-          <p>
-            One calm afternoon, Rocky sees <span class="highlight">Simmie</span> by the water – soft blue, tiny pink bow, lost in her book.
-          </p>
-          <p class="soft">
-            She looks kind. A little shy. Maybe a little broken in the same places.
-          </p>
-          <p>
-            They don’t say much at first. But somehow, the forest feels lighter with both of them in it.
-          </p>
-        </div>
-      </div>
-    </section>
+        function nextScreen(screenNum) {
+            document.getElementById(`screen${currentScreen}`).classList.remove('active');
+            currentScreen = screenNum;
+            document.getElementById(`screen${screenNum}`).classList.add('active');
 
-    <!-- Screen 3: Friends, maybe more -->
-    <section class="screen" id="screen3">
-      <div class="screen-inner">
-        <div class="screen-image">
-          <!-- Both together – flowers / nature -->
-          <img src="TOGETHER_IMAGE_URL" alt="Rocky and Simmie together" />
-          <div class="image-tag">Two friends finding small things to smile about</div>
-        </div>
-        <div class="text-block">
-          <h2>Friends, slowly stitching up</h2>
-          <p>
-            Days turn into little rituals: shared walks, favourite flowers, quiet jokes only they find funny.
-          </p>
-          <p class="soft">
-            Rocky starts to laugh again. Simmie’s smiles last a bit longer. Their broken pieces don’t vanish, but they feel a little softer together.
-          </p>
-          <p>
-            With Valentine’s Day getting closer, Rocky keeps wondering:
-            maybe this isn’t <em>just</em> friendship anymore.
-          </p>
-        </div>
-      </div>
-    </section>
+            if (screenNum === 5) {
+                initPuzzle();
+            } else if (screenNum === 6) {
+                createFloatingDinos();
+            }
+        }
 
-    <!-- Screen 4: The puzzle & the question -->
-    <section class="screen" id="screen4">
-      <div class="screen-inner">
-        <div class="screen-image" id="puzzleWrapper">
-          <!-- Heart-shaped Rocky & Simmie puzzle image -->
-          <img src="PUZZLE_IMAGE_URL" alt="Rocky and Simmie heart puzzle" />
-          <div class="image-tag">Two hearts, a little braver together</div>
-        </div>
-        <div class="text-block">
-          <h2>Maybe now it’s love</h2>
-          <p>
-            Rocky isn’t great with big speeches. So he keeps it simple, honest, and soft – just like the way she makes him feel.
-          </p>
-          <p class="soft">
-            If you’re reading this, it probably means he trusts you with that tiny, quiet question in his chest.
-          </p>
-          <p>
-            So here it is, as gently as he can say it:
-            <br /><br />
-            <span class="highlight">“Would you like to be my Valentine?”</span>
-          </p>
-          <div style="margin-top: 14px; display: flex; flex-wrap: wrap; gap: 10px;">
-            <button class="btn" id="yesBtn">
-              Yes, let’s see where this goes 💚
-            </button>
-            <button class="btn secondary" id="softNoBtn">
-              I care about you, maybe just as friends 💙
-            </button>
-          </div>
-          <p id="responseText" class="soft" style="margin-top: 10px;"></p>
-        </div>
-      </div>
-      <div class="heart-layer" id="heartLayer"></div>
-    </section>
+        // Puzzle Game Logic - 3x3 Click to Swap
+        function initPuzzle() {
+            const container = document.getElementById('puzzleGrid');
+            container.innerHTML = '';
+            
+            // Create shuffled array [0,1,2,3,4,5,6,7,8]
+            puzzleOrder = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+            
+            // Shuffle the pieces
+            for (let i = puzzleOrder.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [puzzleOrder[i], puzzleOrder[j]] = [puzzleOrder[j], puzzleOrder[i]];
+            }
+            
+            // Create puzzle pieces
+            for (let i = 0; i < 9; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'puzzle-piece';
+                piece.setAttribute('data-position', puzzleOrder[i]);
+                piece.setAttribute('data-index', i);
+                piece.addEventListener('click', () => selectPiece(i));
+                container.appendChild(piece);
+            }
+        }
 
-    <!-- Navigation -->
-    <div class="nav">
-      <div class="nav-left">
-        <button class="btn secondary" id="backBtn">← Back</button>
-        <span class="subtle" id="screenLabel">Page 1 of 4</span>
-      </div>
-      <div class="page-dots">
-        <div class="dot active" data-page="1"></div>
-        <div class="dot" data-page="2"></div>
-        <div class="dot" data-page="3"></div>
-        <div class="dot" data-page="4"></div>
-      </div>
-      <button class="btn" id="nextBtn">
-        Next page →
-      </button>
-    </div>
-  </div>
+        function selectPiece(index) {
+            const pieces = document.querySelectorAll('.puzzle-piece');
+            
+            if (selectedPiece === null) {
+                // First piece selected
+                selectedPiece = index;
+                pieces[index].style.border = '3px solid #FF1493';
+                pieces[index].style.transform = 'scale(0.95)';
+            } else if (selectedPiece === index) {
+                // Deselect if clicked again
+                pieces[index].style.border = '3px solid #ddd';
+                pieces[index].style.transform = 'scale(1)';
+                selectedPiece = null;
+            } else {
+                // Second piece selected - swap them
+                pieces[selectedPiece].style.border = '3px solid #ddd';
+                pieces[selectedPiece].style.transform = 'scale(1)';
+                
+                // Swap the positions
+                [puzzleOrder[selectedPiece], puzzleOrder[index]] = [puzzleOrder[index], puzzleOrder[selectedPiece]];
+                
+                // Update the pieces
+                pieces[selectedPiece].setAttribute('data-position', puzzleOrder[selectedPiece]);
+                pieces[index].setAttribute('data-position', puzzleOrder[index]);
+                
+                selectedPiece = null;
+                
+                // Check if puzzle is complete
+                checkPuzzleComplete();
+            }
+        }
 
-  <script>
-    const screens = [
-      document.getElementById("screen1"),
-      document.getElementById("screen2"),
-      document.getElementById("screen3"),
-      document.getElementById("screen4"),
-    ];
-    const dots = Array.from(document.querySelectorAll(".dot"));
-    const backBtn = document.getElementById("backBtn");
-    const nextBtn = document.getElementById("nextBtn");
-    const label = document.getElementById("screenLabel");
-    const yesBtn = document.getElementById("yesBtn");
-    const softNoBtn = document.getElementById("softNoBtn");
-    const responseText = document.getElementById("responseText");
-    const heartLayer = document.getElementById("heartLayer");
+        function checkPuzzleComplete() {
+            let isComplete = true;
+            for (let i = 0; i < 9; i++) {
+                if (puzzleOrder[i] !== i) {
+                    isComplete = false;
+                    break;
+                }
+            }
+            
+            if (isComplete) {
+                setTimeout(() => {
+                    celebratePuzzle();
+                }, 500);
+            }
+        }
 
-    let current = 0;
+        function celebratePuzzle() {
+            const pieces = document.querySelectorAll('.puzzle-piece');
+            pieces.forEach(piece => piece.classList.add('correct'));
+            
+            setTimeout(() => {
+                document.getElementById('puzzleGrid').style.display = 'none';
+                document.getElementById('completedImage').style.display = 'block';
+                
+                setTimeout(() => {
+                    alert('🎉 Amazing! You did it! Rocky and Simeee look so happy together! 💕');
+                    setTimeout(() => {
+                        nextScreen(6);
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+        }
 
-    function updateView() {
-      screens.forEach((s, i) => {
-        s.classList.toggle("active", i === current);
-      });
-      dots.forEach((d, i) => {
-        d.classList.toggle("active", i === current);
-      });
-      label.textContent = `Page ${current + 1} of ${screens.length}`;
-      backBtn.style.opacity = current === 0 ? "0.4" : "1";
-      backBtn.style.pointerEvents = current === 0 ? "none" : "auto";
-      nextBtn.style.opacity = current === screens.length - 1 ? "0.4" : "1";
-      nextBtn.style.pointerEvents = current === screens.length - 1 ? "none" : "auto";
-    }
+        // Floating Dinos Background
+        function createFloatingDinos() {
+            const container = document.getElementById('floatingDinos');
+            const dinos = ['🦖', '🦕', '💚', '💙', '💕', '❤️', '💝', '🎀', '✨', '🌟'];
+            
+            for (let i = 0; i < 20; i++) {
+                const dino = document.createElement('div');
+                dino.className = 'floating-dino';
+                dino.textContent = dinos[Math.floor(Math.random() * dinos.length)];
+                dino.style.left = Math.random() * 100 + '%';
+                dino.style.top = Math.random() * 100 + '%';
+                dino.style.animationDelay = Math.random() * 5 + 's';
+                dino.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                container.appendChild(dino);
+            }
+        }
 
-    backBtn.addEventListener("click", () => {
-      if (current > 0) {
-        current -= 1;
-        updateView();
-      }
-    });
+        // No Button Movement
+        function moveNoButton(event) {
+            const btn = event.target;
+            const container = btn.parentElement;
+            const containerRect = container.getBoundingClientRect();
+            
+            const maxX = window.innerWidth - btn.offsetWidth - 100;
+            const maxY = window.innerHeight - btn.offsetHeight - 100;
+            
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            btn.style.position = 'fixed';
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+            
+            // Make it smaller and smaller
+            const currentSize = parseFloat(window.getComputedStyle(btn).fontSize);
+            if (currentSize > 8) {
+                btn.style.fontSize = (currentSize * 0.9) + 'px';
+            }
+        }
 
-    nextBtn.addEventListener("click", () => {
-      if (current < screens.length - 1) {
-        current += 1;
-        updateView();
-      }
-    });
+        // Say Yes!
+        function sayYes() {
+            nextScreen(7);
+            createHeartsRain();
+            playVictoryAnimation();
+        }
 
-    dots.forEach((dot, index) => {
-      dot.addEventListener("click", () => {
-        current = index;
-        updateView();
-      });
-    });
+        function createHeartsRain() {
+            const container = document.getElementById('heartsRain');
+            const hearts = ['💕', '❤️', '💖', '💗', '💓', '💝', '💘'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                    heart.style.animationDelay = Math.random() * 2 + 's';
+                    container.appendChild(heart);
+                }, i * 100);
+            }
+        }
 
-    function spawnHearts() {
-      heartLayer.innerHTML = "";
-      const colors = ["#ff8fb5", "#ffb3c8", "#ffcdd5", "#ffffff"];
-      for (let i = 0; i < 26; i++) {
-        const h = document.createElement("div");
-        h.className = "heart";
-        h.textContent = "❤";
-        h.style.left = Math.random() * 100 + "%";
-        h.style.bottom = "-40px";
-        h.style.animationDelay = (Math.random() * 3).toFixed(2) + "s";
-        h.style.animationDuration = (3 + Math.random() * 3).toFixed(2) + "s";
-        h.style.color = colors[Math.floor(Math.random() * colors.length)];
-        heartLayer.appendChild(h);
-      }
-    }
-
-    yesBtn.addEventListener("click", () => {
-      responseText.textContent =
-        "Thank you for being gentle with Rocky’s little dinosaur heart. He’s very, very happy right now. 💚";
-      spawnHearts();
-    });
-
-    softNoBtn.addEventListener("click", () => {
-      responseText.textContent =
-        "Thank you for reading his story and being kind. Your honesty still means a lot. 💙";
-      heartLayer.innerHTML = "";
-    });
-
-    // Initial state
-    updateView();
-  </script>
+        function playVictoryAnimation() {
+            // Play celebration sounds if available
+            console.log('🎉 CELEBRATION! 🎉');
+        }
+    </script>
 </body>
 </html>
