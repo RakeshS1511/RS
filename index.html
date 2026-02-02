@@ -1,17 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dino Waiting Lobby</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: #000;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lobby {
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .lobby img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 20px;
+    }
+  </style>
+</head>
 <body>
-  <div class="container">
-    <!-- Single Screen: Rocky Waiting -->
-    <div class="screen active" id="screen1" style="background-image: url('YOUR_ROCKY_IMAGE_URL'); background-size: cover; background-position: center;">
-      <div class="content-overlay">
-        <h1>💚 Rocky is Waiting 💚</h1>
-        <div class="story-text">
-          Rocky sits quietly in the forest, waiting and hoping.  
-          <br><br>
-          Little bunnies hop around him, trying to cheer him up 🐰🐰  
-          <br><br>
-          He wonders if his Valentine will ever arrive...
-        </div>
-      </div>
-    </div>
+  <div class="lobby">
+    <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/a50d2dec-6319-418b-a4d4-f54c4ea9b9c3.png" alt="">
   </div>
 </body>
+</html>
